@@ -92,8 +92,9 @@ class FusionTable {
 			$results = str_replace('/n',' ',$results);
 			$results = str_replace('<br />',' ',$results);
 			$results = str_replace('href','link',$results);
-			//$results = trim( preg_replace( '/\s+/', ' ', $results ) );
-			$results = preg_split("/\n/", $results);
+			$results = trim( preg_replace( '/\s+/', ' ', $results ) );
+			//$results = preg_split("/\n/", $results);
+			$results = preg_split(",", $results);
 			//echo("<br/>It was me<br/><pre>");
 			print_r($results);
 			//echo("</pre><br/>");
