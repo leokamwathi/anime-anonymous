@@ -89,16 +89,17 @@ class FusionTable {
 			
 			//$results = preg_split("/\n/", curl_exec ($c));
 			$fields = 'anime_type,episodes,synopsis,mal_score,mal_image,mal_id,start_date,end_date,synonyms,title';
-			$results = curl_exec ($c);
-			$results = substr($results,strlen($fields));
-			$results = str_replace('\n',' ',$results);
-			$results = str_replace('<br />',' ',$results);
-			$results = str_replace('href','link',$results);
-			$results = trim( preg_replace( '/\s+/', ' ', $results ) );
-			$results = $fields."\n".$results;
-			$results = preg_split("/\n/", $results);
+			$str = curl_exec ($c);
+			$str = substr($str,strlen($fields));
+			$str = str_replace('\n',' ',$str);
+			$str = str_replace('<br />',' ',$str);
+			$str = str_replace('href','link',$str);
+			$str = trim( preg_replace( '/\s+/', ' ', $str ) );
+			$str = $fields."\n".$str;
+			$results = preg_split("/\n/", $str);
 			//$results = preg_split(",", $results);
 			//echo("<br/>It was me<br/><pre>");
+			print_r($str);
 			print_r($results);
 			//echo("</pre><br/>");
 			// If we got an error, raise it
@@ -127,7 +128,19 @@ class FusionTable {
 			curl_setopt($c, CURLOPT_POSTFIELDS, $body);
 			
 			// Place the lines of the output into an array
-			$results = preg_split("/\n/", curl_exec ($c));
+				$fields = 'anime_type,episodes,synopsis,mal_score,mal_image,mal_id,start_date,end_date,synonyms,title';
+			$results = curl_exec ($c);
+			$results = substr($results,strlen($fields));
+			$results = str_replace('\n',' ',$results);
+			$results = str_replace('<br />',' ',$results);
+			$results = str_replace('href','link',$results);
+			$results = trim( preg_replace( '/\s+/', ' ', $results ) );
+			$results = $fields."\n".$results;
+			$results = preg_split("/\n/", $results);
+			//$results = preg_split(",", $results);
+			//echo("<br/>It was me<br/><pre>");
+			print_r($results);
+			//$results = preg_split("/\n/", curl_exec ($c));
 			
 			// If we got an error, raise it
 			if(curl_getinfo($c, CURLINFO_HTTP_CODE) != 200) {
@@ -227,7 +240,7 @@ class FusionTable {
 	$token = GoogleClientLogin("labwax@gmail.com", "xdexters231###", "fusiontables"); 
 	$ft = new FusionTable($token);
 	$output = $ft->query($sql);
-	echo('<!--'.htmlentities(print_r($output)).'-->');
+	//echo('<!--'.htmlentities(print_r($output)).'-->');
 	if($output){
 	echo('<meta property="og:title" content="'.$output[0]['title'].'"/>
     <meta property="og:type" content="tv_show"/>
