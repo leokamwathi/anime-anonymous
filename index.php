@@ -636,11 +636,12 @@ fusiontabledata += '<tr><td align="left" valign="top" colspan="2"><div id="leftb
 fusiontabledata += '</td></tr><tr><td width="210" align="left" valign="top"><table border="0" width="100%" cellspacing="3" cellpadding="3"><tr><td style="border-style: solid; border-width: 0px" bordercolor="#f7f7f7">';
 fusiontabledata += '<div class="picSurround"><img border="0" src="'+ imgstr +'.jpg"></div>';
 
-fusiontabledata += '<div><a href="#addtolistanchor" onclick=" getFavorites("watched");">Show Favorites</a></div>';
-fusiontabledata += '<div><a href="#addtolistanchor" onclick="Add2Favorite("watched",'+mal_id +');">Add to Favorites</a></div>';
+//fusiontabledata += '<div><a href="#addtolistanchor" onclick=" getFavorites("watched");">Show Favorites</a></div>';
+//fusiontabledata += '<div><a href="#addtolistanchor" onclick="Add2Favorite("watched",'+mal_id +');">Add to Favorites</a></div>';
 
 fusiontabledata += '<h2>Anime Rating</h2>';
-fusiontabledata += '<div class="rw-ui-container rw-urid-'+ mal_id +'"></div>';
+fusiontabledata += '<div class="spaceit"><span class="dark_text" style="font-size:20px">'+mal_score+'</span></div>';
+//fusiontabledata += '<div class="rw-ui-container rw-urid-'+ mal_id +'"></div>';
 
 /*
 fusiontabledata += '<div id="sidebar-wrapper"><div class="sidebar section" id="sidebar"><div class="widget HTML" id="HTML3"><div class="widget-content">';
