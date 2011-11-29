@@ -1,289 +1,225 @@
-<?php
+<link rel="stylesheet" href="http://aagmjc5n.facebook.joyent.us/anime.anonymous/animeanonymousstyle.v1.0.css" type="text/css" />
 
-// Enforce https on production
-if ($_SERVER['HTTP_X_FORWARDED_PROTO'] == "http" && $_SERVER['REMOTE_ADDR'] != '127.0.0.1') {
-  header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
-  exit();
+<div id="ftdata">Loading Anime List...<img border="0" height="21" src="http://1.bp.blogspot.com/-_jr8U-tayi0/Tm-PG9zwqAI/AAAAAAAAATM/xkxNHb_R7Gs/s400/indicator-u.gif" width="21" /></div>
+
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript" id="script">
+
+google.load('visualization', '1');
+var counter = false;
+var mytitle = '<h2><div style="float: right;"></div>TOP 100 Anime</h2>';
+//mytitle = 'TOP 100 Anime List';
+function getData() {
+if(getParameterByName("id")){
+ window.location.href = "anime.php?id="+getParameterByName("id");
+}else{
+
+if(getParameterByName("ani")){
+
+var findchar = getParameterByName("ani");
+  var whereClause = "";
+mytitle = findchar+' Animelist';
+if (findchar=="TOP"){
+  whereClause = "ORDER BY mal_score DESC LIMIT 100";
+  //mytitle = '<h2><div style="float: right;"></div>TOP 100 Anime</h2>';
+  mytitle = 'TOP 100 Anime List';
+  counter = true;
+}else if (findchar=="0-9"){
+  whereClause = "Where title >='0' and title < 'A' ORDER BY title DESC LIMIT 500";
+}else if (findchar=="A"){
+  whereClause = "Where title >='A' and title < 'B' ORDER BY title DESC LIMIT 500";
+}else if (findchar=="B"){
+  whereClause = "Where title >='B' and title < 'C' ORDER BY title DESC LIMIT 500";
+}else if (findchar=="C"){
+  whereClause = "Where title >='C' and title < 'D' ORDER BY title DESC LIMIT 500";
+}else if (findchar=="D"){
+  whereClause = "Where title >='D' and title < 'E' ORDER BY title DESC LIMIT 500";
+}else if (findchar=="E"){
+  whereClause = "Where title >='E' and title < 'F' ORDER BY title DESC LIMIT 500";
+}else if (findchar=="F"){
+  whereClause = "Where title >='F' and title < 'G' ORDER BY title DESC LIMIT 500";
+}else if (findchar=="G"){
+  whereClause = "Where title >='G' and title < 'H' ORDER BY title DESC LIMIT 500";
+}else if (findchar=="H"){
+  whereClause = "Where title >='H' and title < 'I' ORDER BY title DESC LIMIT 500";
+}else if (findchar=="I"){
+  whereClause = "Where title >='I' and title < 'J' ORDER BY title DESC LIMIT 500";
+}else if (findchar=="J"){
+  whereClause = "Where title >='J' and title < 'K' ORDER BY title DESC LIMIT 500";
+}else if (findchar=="K"){
+  whereClause = "Where title >='K' and title < 'L' ORDER BY title DESC LIMIT 500";
+}else if (findchar=="L"){
+  whereClause = "Where title >='L' and title < 'M' ORDER BY title DESC LIMIT 500";
+}else if (findchar=="M"){
+  whereClause = "Where title >='M' and title < 'N' ORDER BY title DESC LIMIT 500";
+}else if (findchar=="N"){
+  whereClause = "Where title >='N' and title < 'O' ORDER BY title DESC LIMIT 500";
+}else if (findchar=="O"){
+  whereClause = "Where title >='O' and title < 'P' ORDER BY title DESC LIMIT 500";
+}else if (findchar=="P"){
+  whereClause = "Where title >='P' and title < 'Q' ORDER BY title DESC LIMIT 500";
+}else if (findchar=="Q"){
+  whereClause = "Where title >='Q' and title < 'R' ORDER BY title DESC LIMIT 500";
+}else if (findchar=="R"){
+  whereClause = "Where title >='R' and title < 'S' ORDER BY title DESC LIMIT 500";
+}else if (findchar=="S"){
+  whereClause = "Where title >='S' and title < 'T' ORDER BY title DESC LIMIT 500";
+}else if (findchar=="T"){
+  whereClause = "Where title >='T' and title < 'U' ORDER BY title DESC LIMIT 500";
+}else if (findchar=="U"){
+  whereClause = "Where title >='U' and title < 'V' ORDER BY title DESC LIMIT 500";
+}else if (findchar=="V"){
+  whereClause = "Where title >='V' and title < 'W' ORDER BY title DESC LIMIT 500";
+}else if (findchar=="W"){
+  whereClause = "Where title >='W' and title < 'X' ORDER BY title DESC LIMIT 500";
+}else if (findchar=="X"){
+  whereClause = "Where title >='X' and title < 'Y' ORDER BY title DESC LIMIT 500";
+}else if (findchar=="Y"){
+  whereClause = "Where title >='Y' and title < 'Z' ORDER BY title DESC LIMIT 500";
+}else if (findchar=="Z"){
+  whereClause = "Where title >='Z' and title < 'a' ORDER BY title DESC LIMIT 500";
+}else{
+   whereClause = "ORDER BY mal_score DESC LIMIT 100";
+   mytitle = 'TOP 100 Anime List';
+  counter = true;
+}
+}else{
+   whereClause = "ORDER BY mal_score DESC LIMIT 100";
+   mytitle = 'TOP 100 Anime List';
+  counter = true;
+}
+  var queryText = encodeURIComponent("SELECT 'title', 'anime_type', 'episodes', 'synopsis', 'mal_score', 'mal_image','mal_id' FROM 1409399 " + whereClause);
+  var query = new google.visualization.Query('http://www.google.com/fusiontables/gvizdata?tq='  + queryText);
+  query.send(getRows);
+  fbinit();
+  }
 }
 
-/**
- * This sample app is provided to kickstart your experience using Facebook's
- * resources for developers.  This sample app provides examples of several
- * key concepts, including authentication, the Graph API, and FQL (Facebook
- * Query Language). Please visit the docs at 'developers.facebook.com/docs'
- * to learn more about the resources available to you
- */
-
-// Provides access to Facebook specific utilities defined in 'FBUtils.php'
-require_once('FBUtils.php');
-// Provides access to app specific values such as your app id and app secret.
-// Defined in 'AppInfo.php'
-require_once('AppInfo.php');
-// This provides access to helper functions defined in 'utils.php'
-require_once('utils.php');
-
-/*****************************************************************************
- *
- * The content below provides examples of how to fetch Facebook data using the
- * Graph API and FQL.  It uses the helper functions defined in 'utils.php' to
- * do so.  You should change this section so that it prepares all of the
- * information that you want to display to the user.
- *
- ****************************************************************************/
-
-// Log the user in, and get their access token
-$token = FBUtils::login(AppInfo::getHome());
-if ($token) {
-
-  // Fetch the viewer's basic information, using the token just provided
-  $basic = FBUtils::fetchFromFBGraph("me?access_token=$token");
-  $my_id = assertNumeric(idx($basic, 'id'));
-
-  // Fetch the basic info of the app that they are using
-  $app_id = AppInfo::appID();
-  $app_info = FBUtils::fetchFromFBGraph("$app_id?access_token=$token");
-
-  // This fetches some things that you like . 'limit=*" only returns * values.
-  // To see the format of the data you are retrieving, use the "Graph API
-  // Explorer" which is at https://developers.facebook.com/tools/explorer/
-  $likes = array_values(
-    idx(FBUtils::fetchFromFBGraph("me/likes?access_token=$token&limit=4"), 'data')
-  );
-
-  // This fetches 4 of your friends.
-  $friends = array_values(
-    idx(FBUtils::fetchFromFBGraph("me/friends?access_token=$token&limit=4"), 'data')
-  );
-
-  // And this returns 16 of your photos.
-  $photos = array_values(
-    idx($raw = FBUtils::fetchFromFBGraph("me/photos?access_token=$token&limit=16"), 'data')
-  );
-
-  // Here is an example of a FQL call that fetches all of your friends that are
-  // using this app
-  $app_using_friends = FBUtils::fql(
-    "SELECT uid, name, is_app_user, pic_square FROM user WHERE uid in (SELECT uid2 FROM friend WHERE uid1 = me()) AND is_app_user = 1",
-    $token
-  );
-
-  // This formats our home URL so that we can pass it as a web request
-  $encoded_home = urlencode(AppInfo::getHome());
-  $redirect_url = $encoded_home . 'close.php';
-
-  // These two URL's are links to dialogs that you will be able to use to share
-  // your app with others.  Look under the documentation for dialogs at
-  // developers.facebook.com for more information
-  $send_url = "https://www.facebook.com/dialog/send?redirect_uri=$redirect_url&display=popup&app_id=$app_id&link=$encoded_home";
-  $post_to_wall_url = "https://www.facebook.com/dialog/feed?redirect_uri=$redirect_url&display=popup&app_id=$app_id";
-} else {
-  // Stop running if we did not get a valid response from logging in
-  exit("Invalid credentials");
+function getParameterByName(name)
+{
+  name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+  var regexS = "[\\?&]" + name + "=([^&#]*)";
+  var regex = new RegExp(regexS);
+  var results = regex.exec(window.location.href);
+  if(results == null)
+    return "";
+  else
+    return decodeURIComponent(results[1].replace(/\+/g, " "));
 }
-?>
 
-<!-- This following code is responsible for rendering the HTML   -->
-<!-- content on the page.  Here we use the information generated -->
-<!-- in the above requests to display content that is personal   -->
-<!-- to whomever views the page.  You would rewrite this content -->
-<!-- with your own HTML content.  Be sure that you sanitize any  -->
-<!-- content that you will be displaying to the user.  idx() by  -->
-<!-- default will remove any html tags from the value being      -->
-<!-- and echoEntity() will echo the sanitized content.  Both of  -->
-<!-- these functions are located and documented in 'utils.php'.  -->
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
+function getRows(response) {
+  numRows = response.getDataTable().getNumberOfRows();
+  numCols = response.getDataTable().getNumberOfColumns();
+  var fusiontabledata = "";
+  var evenx = false;
+  
+  //for(i = 0; i < numCols; i++) {
+  //fusiontabledata += response.getDataTable().getColumnLabel(i) + ",";
+  //}
 
-    <!-- We get the name of the app out of the information fetched -->
-    <title><?php echo(idx($app_info, 'name')) ?></title>
-    <link rel="stylesheet" href="stylesheets/screen.css" media="screen">
+  var topList = ""
 
-    <!-- These are Open Graph tags.  They add meta data to your  -->
-    <!-- site that facebook uses when your content is shared     -->
-    <!-- over facebook.  You should fill these tags in with      -->
-    <!-- your data.  To learn more about Open Graph, visit       -->
-    <!-- 'https://developers.facebook.com/docs/opengraph/'       -->
-    <meta property="og:title" content=""/>
-    <meta property="og:type" content=""/>
-    <meta property="og:url" content=""/>
-    <meta property="og:image" content=""/>
-    <meta property="og:site_name" content=""/>
-    <?php echo('<meta property="fb:app_id" content="' . AppInfo::appID() . '" />'); ?>
-    <script>
-      function popup(pageURL, title,w,h) {
-        var left = (screen.width/2)-(w/2);
-        var top = (screen.height/2)-(h/2);
-        var targetWin = window.open(
-          pageURL,
-          title,
-          'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left
-          );
-      }
-    </script>
-    <!--[if IE]>
-      <script>
-        var tags = ['header', 'section'];
-        while(tags.length)
-          document.createElement(tags.pop());
-      </script>
-    <![endif]-->
-  </head>
-  <body>
-    <header class="clearfix">
-      <!-- By passing a valid access token here, we are able to display -->
-      <!-- the user's images without having to download or prepare -->
-      <!-- them ahead of time -->
-      <p id="picture" style="background-image: url(https://graph.facebook.com/me/picture?type=normal&access_token=<?php echoEntity($token) ?>)"></p>
+topList  += '<div id="horiznav_nav" style="margin: 5px 0 10px 0;">';
+topList  += '<ul style="margin-right: 0; padding-right: 0;">';
+topList  += '<li><a href="?ani=top" class="horiznav_active">TOP</a></li>';
+topList  += '<li><a href="?ani=0-9">0-9</a></li>';
+topList  += '<li><a href="?ani=A">A</a></li>';
+topList  += '<li><a href="?ani=B">B</a></li>';
+topList  += '<li><a href="?ani=C">C</a></li>';
+topList  += '<li><a href="?ani=D">D</a></li>';
+topList  += '<li><a href="?ani=E">E</a></li>';
+topList  += '<li><a href="?ani=F">F</a></li>';
+topList  += '<li><a href="?ani=G">G</a></li>';
+topList  += '<li><a href="?ani=H">H</a></li>';
+topList  += '<li><a href="?ani=I">I</a></li>';
+topList  += '<li><a href="?ani=J">J</a></li>';
+topList  += '<li><a href="?ani=K">K</a></li>';
+topList  += '<li><a href="?ani=L">L</a></li>';
+topList  += '<li><a href="?ani=M">M</a></li>';
+topList  += '<li><a href="?ani=N">N</a></li>';
+topList  += '<li><a href="?ani=O">O</a></li>';
+topList  += '<li><a href="?ani=P">P</a></li>';
+topList  += '<li><a href="?ani=Q">Q</a></li>';
+topList  += '<li><a href="?ani=R">R</a></li>';
+topList  += '<li><a href="?ani=S">S</a></li>';
+topList  += '<li><a href="?ani=T">T</a></li>';
+topList  += '<li><a href="?ani=U">U</a></li>';
+topList  += '<li><a href="?ani=V">V</a></li>';
+topList  += '<li><a href="?ani=W">W</a></li>';
+topList  += '<li><a href="?ani=X">X</a></li>';
+topList  += '<li><a href="?ani=Y">Y</a></li>';
+topList  += '<li><a href="?ani=Z">Z</a></li>';
+topList  += '</ul>';
+topList  += '</div>';
 
-      <div>
-        <h1>Welcome, <strong><?php echo idx($basic, 'name'); ?></strong></h1>
-        <p class="tagline">
-          This is your app
-          <a href="<?php echo(idx($app_info, 'link'));?>"><?php echo(idx($app_info, 'name')); ?></a>
-        </p>
-        <div id="share-app">
-          <p>Share your app:</p>
-          <ul>
-            <li>
-              <a href="#" class="facebook-button" onclick="popup('<?php echo $post_to_wall_url ?>', 'Post to Wall', 580, 400);">
-                <span class="plus">Post to Wall</span>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="facebook-button speech-bubble" onclick="popup('<?php echo $send_url ?>', 'Send', 580, 400);">
-                <span class="speech-bubble">Send to Friends</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </header>
-    <section id="get-started">
-      <p>Welcome to your Facebook app, running on <span>heroku</span>!</p>
-      <a href="http://devcenter.heroku.com/articles/facebook" class="button">Learn How to Edit This App</a>
-    </section>
 
-    <section id="samples" class="clearfix">
-      <h1>Examples of the Facebook Graph API</h1>
+  fusiontabledata += topList  + '<h2 style="font-size: 24px;">'+mytitle+'</h2>';
+  fusiontabledata += '<table><tr valign="top"><td align="left" valign="top"><table border="0" cellpadding="5" cellspacing="0">';
+  fusiontabledata += '<tr valign="top">';
+  for(i = 0; i < numRows; i++) {
+    //for(j = 0; j < numCols-1; j++) {
+ var q = i+1;
+ var pq = 30;
+ var title = response.getDataTable().getValue(i, 0);
+ var anime_type = response.getDataTable().getValue(i, 1);
+ var episodes = response.getDataTable().getValue(i, 2);
+ var synopsis = response.getDataTable().getValue(i, 3);
+ var titleURL = encodeURIComponent(title);
+ var stx = synopsis;
+while(synopsis==stx){
 
-      <div class="list">
-        <h3>A few of your friends</h3>
-        <ul class="friends">
-          <?php
-            foreach ($friends as $friend) {
-              // Extract the pieces of info we need from the requests above
-              $id = assertNumeric(idx($friend, 'id'));
-              $name = idx($friend, 'name');
-              // Here we link each friend we display to their profile
-              echo('
-                <li>
-                  <a href="#" onclick="window.open(\'http://www.facebook.com/' . $id . '\')">
-                    <img src="https://graph.facebook.com/' . $id . '/picture?type=square" alt="' . $name . '">'
-                    . $name . '
-                  </a>
-                </li>');
-            }
-          ?>
-        </ul>
-      </div>
+synopsis = synopsis.replace("&lt;","<"); 
+synopsis = synopsis.replace("&gt;",">");
+synopsis = synopsis.replace("\n","<br/>");
 
-      <div class="list inline">
-        <h3>Recent photos</h3>
-        <ul class="photos">
-          <?php
-            foreach ($photos as $key => $photo) {
-              // Extract the pieces of info we need from the requests above
-              $src = idx($photo, 'source');
-              $name = idx($photo, 'name');
-              $id = assertNumeric(idx($photo, 'id'));
-              $class = ($key%4 === 0) ? ' class="first-column"' : '';
+if(synopsis ==stx){
+stx = "macmendex";
+}else{
+stx = synopsis ;
+}
+}
 
-              // Here we link each photo we display to it's location on Facebook
-              echo('
-                <li style="background-image: url(' . $src . ')"' . $class . '>
-                  <a href="#" onclick="window.open(\'http://www.facebook.com/' .$id . '\')">
-                    ' . $name . '
-                  </a>
-                </li>'
-              );
-            }
-          ?>
-        </ul>
-      </div>
+ synopsis = synopsis.substr(0,150);
 
-      <div class="list">
-        <h3>Things you like</h3>
-        <ul class="things">
-          <?php
-            foreach ($likes as $like) {
-              // Extract the pieces of info we need from the requests above
-              $id = assertNumeric(idx($like, 'id'));
-              $item = idx($like, 'name');
-              // This display's the object that the user liked as a link to
-              // that object's page.
-              echo('
-                <li>
-                  <a href="#" onclick="window.open(\'http://www.facebook.com/' .$id .'\')">
-                    <img src="https://graph.facebook.com/' . $id . '/picture?type=square" alt="' . $item . '">
-                    ' . $item . '
-                  </a>
-                </li>');
-            }
-          ?>
-        </ul>
-      </div>
+ var mal_score = response.getDataTable().getValue(i, 4);
+ var imgstr = response.getDataTable().getValue(i, 5);
+ imgstr = imgstr.substr(0,(imgstr.length-4));
+ 
+ var crc_code = response.getDataTable().getValue(i, 6);
+ if(counter){
+ fusiontabledata += '<td class="borderClass" style="border-width: 0 0 1px 0;" align="center" valign="top" width="'+pq+'">';
+ fusiontabledata += '<span style="font-weight: bold; font-size: 24px;" class="lightLink">'+q+'</span></td>';
+ }
+ fusiontabledata += '<td class="borderClass" align="center" valign="top" width="50">';
+ fusiontabledata += '<div class="picSurround">';
+ fusiontabledata += '<a href="anime.php?id='+crc_code+'&name='+titleURL+'" class="hoverinfo_trigger" id="#area5114" rel="#info5114">';
+ fusiontabledata += '<img src="'+imgstr+'t.jpg" border="0">';
+ fusiontabledata += '</a>';
+ fusiontabledata += '</div>';
+ fusiontabledata += '</td>';
+ fusiontabledata += '<td class="borderClass" align="left" valign="top">';
+ fusiontabledata += '<div id="area5114"> <div id="info5114" rel="a5114" class="hoverinfo"> </div> </div>';
+ fusiontabledata += '<a href="anime.php?id='+crc_code+'&name='+titleURL +'" class="hoverinfo_trigger" id="#area5114" rel="#info5114">';
+ fusiontabledata += '<strong>'+title+'</strong> </a> <div class="spaceit_pad"> ' + synopsis ;
+ fusiontabledata += '<a href="anime.php?id='+ crc_code + '&name='+titleURL +'">';
+ fusiontabledata += '<i>... read more</i></a><br><span class="lightLink">';
+ fusiontabledata += anime_type + ',' + episodes + ' eps , scored ' + mal_score;
+ fusiontabledata += '</span> </div> </td>';
+ if(evenx){
+     fusiontabledata += '</tr><tr valign="top">';
+  evenx = false;
+ }else{
+  evenx = true;
+ }
+  }
 
-      <div class="list">
-        <h3>Friends using this app</h3>
-        <ul class="friends">
-          <?php
-            foreach ($app_using_friends as $auf) {
-              // Extract the pieces of info we need from the requests above
-              $uid = assertNumeric(idx($auf, 'uid'));
-              $pic = idx($auf, 'pic_square');
-              $name = idx($auf, 'name');
-              echo('
-                <li>
-                  <a href="#" onclick="window.open(\'http://www.facebook.com/' .$uid . '\')">
-                    <img src="https://graph.facebook.com/' . $uid . '/picture?type=square" alt="' . $name . '">
-                    ' . $name . '
-                  </a>
-                </li>');
-            }
-          ?>
-        </ul>
-      </div>
-    </section>
-
-    <section id="guides" class="clearfix">
-      <h1>Learn More About Heroku &amp; Facebook Apps</h1>
-      <ul>
-        <li>
-          <a href="http://www.heroku.com/" class="icon heroku">Heroku</a>
-          <p>Learn more about <a href="http://www.heroku.com/">Heroku</a>, or read developer docs in the Heroku <a href="http://devcenter.heroku.com/">Dev Center</a>.</p>
-        </li>
-        <li>
-          <a href="http://developers.facebook.com/docs/guides/web/" class="icon websites">Websites</a>
-          <p>
-            Drive growth and engagement on your site with
-            Facebook Login and Social Plugins.
-          </p>
-        </li>
-        <li>
-          <a href="http://developers.facebook.com/docs/guides/mobile/" class="icon mobile-apps">Mobile Apps</a>
-          <p>
-            Integrate with our core experience by building apps
-            that operate within Facebook.
-          </p>
-        </li>
-        <li>
-          <a href="http://developers.facebook.com/docs/guides/canvas/" class="icon apps-on-facebook">Apps on Facebook</a>
-          <p>Let users find and connect to their friends in mobile apps and games.</p>
-        </li>
-      </ul>
-    </section>
-  </body>
-  </body>
-</html>
+  fusiontabledata += '</table></td><td align="left" valign="top"><table border="0" cellpadding="5" cellspacing="0">';
+   fusiontabledata += "</table></td></tr></table><br/>";
+   
+  document.getElementById('ftdata').innerHTML = fusiontabledata+mytitle;
+ fbinit(); 
+  //var mytitle = '<h2><div style="float: right;"></div>TOP 100 Anime</h2>';
+  document.getElementsByTagName('h3')[0].innerHTML = "";
+}
+</script>
+<body onload="getData();"/>
