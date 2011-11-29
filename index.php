@@ -62,7 +62,12 @@ var mytitle = '<h2><div style="float: right;"></div>TOP 100 Anime</h2>';
 
 function getData() {
 if(getParameterByName("id")){
- window.location.href = "anime.php?id="+getParameterByName("id");
+ //window.location.href = "?id="+getParameterByName("id");
+	var whereClause = "";
+	whereClause = "WHERE mal_id = " + getParameterByName("id");		 
+	var queryText = encodeURIComponent("SELECT 'title', 'anime_type', 'episodes', 'synopsis', 'mal_score', 'mal_image','mal_id','start_date','end_date','synonyms' FROM 1409399 " + whereClause);
+	var query = new google.visualization.Query('http://www.google.com/fusiontables/gvizdata?tq='  + queryText);
+	query.send(getAnime);
 }else{
 
 if(getParameterByName("ani")){
@@ -243,7 +248,7 @@ stx = synopsis ;
  }
  fusiontabledata += '<td class="borderClass" align="center" valign="top" width="100">';
  fusiontabledata += '<div class="picSurround">';
- fusiontabledata += '<a href="anime.php?id='+crc_code+'&name='+titleURL+'" class="hoverinfo_trigger" id="#area5114" rel="#info5114">';
+ fusiontabledata += '<a href="?id='+crc_code+'&name='+titleURL+'" class="hoverinfo_trigger" id="#area5114" rel="#info5114">';
  fusiontabledata += '<img src="'+imgstr+'t.jpg" width="150%" height="150%"  border="0">';
  //fusiontabledata += '<img src="'+imgstr+'.jpg" width="50%" height="50%" border="0">';
  fusiontabledata += '</a>';
@@ -251,9 +256,9 @@ stx = synopsis ;
  fusiontabledata += '</td>';
  fusiontabledata += '<td class="borderClass" align="left" valign="top">';
  fusiontabledata += '<div id="area5114"> <div id="info5114" rel="a5114" class="hoverinfo"> </div> </div>';
- fusiontabledata += '<a href="anime.php?id='+crc_code+'&name='+titleURL +'" class="hoverinfo_trigger" id="#area5114" rel="#info5114">';
+ fusiontabledata += '<a href="?id='+crc_code+'&name='+titleURL +'" class="hoverinfo_trigger" id="#area5114" rel="#info5114">';
  fusiontabledata += '<strong>'+title+'</strong> </a> <div class="spaceit_pad"> ' + synopsis ;
- fusiontabledata += '<a href="anime.php?id='+ crc_code + '&name='+titleURL +'">';
+ fusiontabledata += '<a href="?id='+ crc_code + '&name='+titleURL +'">';
  fusiontabledata += '<i>... read more</i></a><br><span class="lightLink">';
  fusiontabledata += anime_type + ',' + episodes + ' eps , scored ' + mal_score;
  fusiontabledata += '</span> </div> </td>';
@@ -273,5 +278,167 @@ stx = synopsis ;
   //var mytitle = '<h2><div style="float: right;"></div>TOP 100 Anime</h2>';
   //document.getElementsByTagName('h3')[0].innerHTML = "";
 }
+
+
+function getAnime(response) {
+
+	title = response.getDataTable().getValue(0, 0);
+	anime_type = response.getDataTable().getValue(0, 1);
+	episodes = response.getDataTable().getValue(0, 2);
+	synopsis = response.getDataTable().getValue(0, 3);
+	titleURL = encodeURIComponent(title);
+        cleanSynopsis = synopsis; 
+        
+	
+	
+var stx = cleanSynopsis;
+while(cleanSynopsis==stx){
+
+cleanSynopsis = synopsis.replace("<","&lt;"); 
+cleanSynopsis = synopsis.replace(">","&gt;");
+
+
+if(cleanSynopsis==stx){
+stx = "macmendex";
+}else{
+stx = cleanSynopsis;
+}
+}
+	
+stx = synopsis ;
+while(synopsis ==stx){
+
+synopsis = synopsis.replace("&lt;","<"); 
+synopsis = synopsis.replace("&gt;",">");
+synopsis = synopsis.replace("\n","<br/>");
+//synopsis = synopsis.replace(" br/","br/");
+//synopsis = synopsis.replace("br/ ","br/");
+
+if(synopsis ==stx){
+stx = "macmendex";
+}else{
+stx = synopsis ;
+}
+}
+	
+	var mal_score = response.getDataTable().getValue(0, 4);
+	var imgstr = response.getDataTable().getValue(0, 5);
+	imgstr = imgstr.substr(0,(imgstr.length-4));
+        animeImg = imgstr;
+	thumbImg = imgstr+"t.jpg";
+	var mal_id = response.getDataTable().getValue(0, 6);
+	var sdate = response.getDataTable().getValue(0, 7);
+	var edate = response.getDataTable().getValue(0, 8);
+	var synonyms = title; + ' , ' + response.getDataTable().getValue(0, 9);
+	animeID = mal_id;
+	if (sdate){
+		var start_date = new Date(sdate).toDateString();
+	}else{
+		var start_date = "";
+	}
+	
+	if (edate){
+		var end_date =new Date(edate).toDateString();
+	}else{
+		var end_date = "";
+	}
+var fusiontabledata = "";
+fusiontabledata += '<h2 style="font-size: 20px;">'+title+'<div><fb:like href="http://apps.facebook.com/anime-anonymous/?id='+mal_id +'" send="true" width="700" show_faces="false" font=""></fb:like></div></h2>';
+fusiontabledata += '<div><div><table border="0" width="100%" cellspacing="3" style="float: left">';
+fusiontabledata += '<tr><td align="left" valign="top" colspan="2"><div id="leftbody"></div>';
+fusiontabledata += '</td></tr><tr><td width="210" align="left" valign="top"><table border="0" width="100%" cellspacing="3" cellpadding="3"><tr><td style="border-style: solid; border-width: 0px" bordercolor="#f7f7f7">';
+fusiontabledata += '<div class="picSurround"><img border="0" src="'+ imgstr +'.jpg"></div>';
+
+fusiontabledata += '<div><a href="#addtolistanchor" onclick=" getFavorites("watched");">Show Favorites</a></div>';
+fusiontabledata += '<div><a href="#addtolistanchor" onclick="Add2Favorite("watched",'+mal_id +');">Add to Favorites</a></div>';
+
+fusiontabledata += '<h2>Anime Rating</h2>';
+fusiontabledata += '<div class="rw-ui-container rw-urid-'+ mal_id +'"></div>';
+
+/*
+fusiontabledata += '<div id="sidebar-wrapper"><div class="sidebar section" id="sidebar"><div class="widget HTML" id="HTML3"><div class="widget-content">';
+fusiontabledata += '<div id="profileRows"><a href="#addtolistanchor" onclick=" getFavorites("watched");">Show Favorites</a><a href="javascript:void(0);" onclick="Add2Favorite("watched",'+mal_id +');" style="font-weight: normal;"><span id="favOutput">Add to Favorites</span></a><a href="javascript:doedit(721);">Edit Anime Information</a></div>';
+*/
+
+fusiontabledata += '<h2>Alternative Titles</h2>';
+fusiontabledata += '<div class="spaceit"><span class="dark_text">English:</span> '+synonyms+'</div>';
+
+fusiontabledata += '<h2>Information</h2>';
+fusiontabledata += '<div class="spaceit"><span class="dark_text">Type:</span> '+anime_type+'</div>';
+fusiontabledata += '<div class="spaceit"><span class="dark_text">Episodes:</span> '+episodes+'</div>';
+fusiontabledata += '<div class="spaceit"><span class="dark_text">Aired:</span> '+start_date+' to '+end_date+'</div>';
+
+/*
+fusiontabledata += '<h2>Statistics</h2>';
+fusiontabledata += '<div class="spaceit"><span class="dark_text">Score:</span> '+mal_score+'</div>';
+*/
+
+fusiontabledata += '</div></div></div></td></tr>';
+
+
+fusiontabledata += '<tr><td>getfans</td></tr>';
+fusiontabledata += '</td></tr></table>';
+fusiontabledata += '</td><td align="left" valign="top"><table border="0" width="100%" cellspacing="3" cellpadding="3" style="float: left"><tr><td class="label" align="left" colspan="2"><h2>Synopsis</h2></td>';
+fusiontabledata += '</tr><tr><td width="100%">';
+fusiontabledata += synopsis;
+fusiontabledata += '</td></tr><tr><td class="label" align="left" colspan="2">&nbsp;</td></tr><tr><td class="label" align="left" colspan="2">';
+
+/*
+fusiontabledata += '<h2>Reletaed Anime</h2>';
+fusiontabledata += 'side_story<br/>';
+fusiontabledata += 'prequel<br/>';
+fusiontabledata += 'sequel<br/>';
+fusiontabledata += '<h2>'+title+' Fans</h2>';
+fusiontabledata += '%Get fans List%';
+*/
+
+fusiontabledata += '<h2>Facebook Comments</h2>';
+fusiontabledata += '<fb:comments href="http://apps.facebook.com/anime-anonymous/?id='+mal_id  +'" num_posts="2" width="500" xid="'+mal_id+'"_anime></fb:comments>';
+fusiontabledata += '</td></tr></table>';
+fusiontabledata += '</tr></table></td></tr></table>';
+
+document.getElementById('ftdata').innerHTML = fusiontabledata;
+
+//var mytitle = '<a href="http://animedom.blogspot.com/2011/09/animelist.html">'+title+'</a>';
+//document.getElementsByTagName('h3')[0].innerHTML = ""; //Clear blogger title
+try
+  {
+fbinit();
+RW_Async_Init();
+
+//alert("Wish me luck");
+var i, refAttr;
+var metaTags = document.getElementsByTagName('meta');
+//alert("we did it"+metaTags.length);
+}catch(er){
+//nothing to see here
+//alert(er.description);
+}
+for (i in metaTags) {
+try
+  {
+	refAttr = metaTags[i].getAttribute("property");
+
+//    alert(refAttr+" : "+metaTags[i].getAttribute("content"));
+
+    if( refAttr == 'og:image') {
+		metaTags[i].setAttribute("content",thumbImg) ;
+             //   alert(refAttr+" : "+metaTags[i].getAttribute("content"));
+    }
+	if( refAttr == 'og:description') {
+		metaTags[i].setAttribute("content",cleanSynopsis) ;
+              //  alert(refAttr+" : "+metaTags[i].getAttribute("content"));
+    }
+	if( refAttr == 'description') {
+		metaTags[i].setAttribute("content",cleanSynopsis) ;
+             //   alert(refAttr+" : "+metaTags[i].getAttribute("content"));
+    }
+}catch(er){
+//nothing to see here
+//alert(er.message);
+}	
+}
+}
+
 </script>
 <body onload="getData();"/>
