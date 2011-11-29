@@ -87,9 +87,10 @@ class FusionTable {
 			
 			// Place the lines of the output into an array
 			
-			$results = preg_split("/\n/", curl_exec ($c));
+			//$results = preg_split("/\n/", curl_exec ($c));
+			$results = curl_exec ($c);
 			//echo("<br/>It was me<br/><pre>");
-			//print_r($results);
+			print_r($results);
 			//echo("</pre><br/>");
 			// If we got an error, raise it
 			if(curl_getinfo($c, CURLINFO_HTTP_CODE) != 200) {
@@ -217,7 +218,7 @@ class FusionTable {
 	$token = GoogleClientLogin("labwax@gmail.com", "xdexters231###", "fusiontables"); 
 	$ft = new FusionTable($token);
 	$output = $ft->query($sql);
-	echo('<!--'.print_r($output).'-->');
+	echo('<!--'.htmlentities(print_r($output)).'-->');
 	if($output){
 	echo('<meta property="og:title" content="'.$output[0]['title'].'"/>
     <meta property="og:type" content="tv_show"/>
