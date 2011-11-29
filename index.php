@@ -88,11 +88,14 @@ class FusionTable {
 			// Place the lines of the output into an array
 			
 			//$results = preg_split("/\n/", curl_exec ($c));
+			$fields = 'anime_type,episodes,synopsis,mal_score,mal_image,mal_id,start_date,end_date,synonyms,title'
 			$results = curl_exec ($c);
+			$results = substr($results,strlen($fields));
 			$results = str_replace('\n',' ',$results);
 			$results = str_replace('<br />',' ',$results);
 			$results = str_replace('href','link',$results);
-			//$results = trim( preg_replace( '/\s+/', ' ', $results ) );
+			$results = trim( preg_replace( '/\s+/', ' ', $results ) );
+			$results = $fields."\n".$results;
 			$results = preg_split("/\n/", $results);
 			//$results = preg_split(",", $results);
 			//echo("<br/>It was me<br/><pre>");
