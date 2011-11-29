@@ -241,11 +241,11 @@ stx = synopsis ;
  fusiontabledata += '<td class="borderClass" style="border-width: 0 0 1px 0;" align="center" valign="top" width="'+pq+'">';
  fusiontabledata += '<span style="font-weight: bold; font-size: 24px;" class="lightLink">'+q+'</span></td>';
  }
- fusiontabledata += '<td class="borderClass" align="center" valign="top" width="50">';
+ fusiontabledata += '<td class="borderClass" align="center" valign="top" width="100">';
  fusiontabledata += '<div class="picSurround">';
  fusiontabledata += '<a href="anime.php?id='+crc_code+'&name='+titleURL+'" class="hoverinfo_trigger" id="#area5114" rel="#info5114">';
  //fusiontabledata += '<img src="'+imgstr+'t.jpg" border="0">';
-  fusiontabledata += '<img src="'+imgstr+'.jpg" width = "50%" height = "50%" border="0">';
+  fusiontabledata += '<img src="'+imgstr+'.jpg" width="50%" height="50%" border="0">';
  fusiontabledata += '</a>';
  fusiontabledata += '</div>';
  fusiontabledata += '</td>';
