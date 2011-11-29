@@ -505,7 +505,9 @@ while(synopsis==stx){
 
 synopsis = synopsis.replace("&lt;","<"); 
 synopsis = synopsis.replace("&gt;",">");
-synopsis = synopsis.replace("\n","<br/>");
+//synopsis = synopsis.replace("\n","<br/>");
+synopsis = synopsis.replace( /\r\n|\r|\n/g, "<br/>");
+
 
 if(synopsis ==stx){
 stx = "macmendex";
