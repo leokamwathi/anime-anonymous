@@ -676,7 +676,8 @@ fusiontabledata += '<div class="spaceit"><span class="dark_text">Score:</span> '
 fusiontabledata += '</div></div></div></td></tr>';
 
 
-fusiontabledata += '<tr><td><h2>Fans</h2><br/><fb:facepile href="http://apps.facebook.com/anime-anonymous/?id='+mal_id+'" width="200" max_rows="8"></fb:facepile></td></tr>'; //find a way to get a list of people who like a link. 
+//fusiontabledata += '<tr><td><h2>Fans</h2><br/><fb:facepile href="http://apps.facebook.com/anime-anonymous/?id='+mal_id+'" width="200" max_rows="8"></fb:facepile></td></tr>'; //find a way to get a list of people who like a link. 
+fusiontabledata += '<tr><td><h2>Fans</h2><br/><fb:like-box href="http://apps.facebook.com/anime-anonymous/?id='+mal_id+'" width="200" show_faces="true" stream="false" header="false"></fb:like-box></td></tr>'; //find a way to get a list of people who like a link. 
 fusiontabledata += '</td></tr></table>';
 fusiontabledata += '</td><td align="left" valign="top"><table border="0" width="100%" cellspacing="3" cellpadding="3" style="float: left"><tr><td class="label" align="left" colspan="2"><h2>Synopsis</h2></td>';
 fusiontabledata += '</tr><tr><td width="100%">';
