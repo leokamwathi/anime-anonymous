@@ -501,6 +501,7 @@ topList  += '</div>';
  var synopsis = response.getDataTable().getValue(i, 3);
  var titleURL = encodeURIComponent(title);
  var stx = synopsis;
+ synopsis = synopsis.nl2br('<br/>');
 while(synopsis==stx){
 
 synopsis = synopsis.replace("&lt;","<"); 
@@ -587,8 +588,8 @@ stx = cleanSynopsis;
 }
 	
 stx = synopsis ;
+synopsis = synopsis.nl2br('<br/>');
 while(synopsis ==stx){
-
 synopsis = synopsis.replace("&lt;","<"); 
 synopsis = synopsis.replace("&gt;",">");
 synopsis = synopsis.replace("\n","<br/>");
@@ -760,7 +761,27 @@ try
 }
 */
 }
-
+String.prototype.nl2br = function() {
+	var br;
+	if( typeof arguments[0] != 'undefined' ) {
+		br = arguments[0];
+	}
+	else {
+		br = '<br />';
+	}
+	return this.replace( /\r\n|\r|\n/g, br );
+}
+ 
+String.prototype.br2nl = function() {
+	var nl;
+	if( typeof arguments[0] != 'undefined' ) {
+		nl = arguments[0];
+	} 
+	else {
+		nl = '\r\n';
+	}
+	return this.replace( /\<br(\s*\/|)\>/g, nl );
+}
 </script>
 </head>
 <body onload="getData();">
