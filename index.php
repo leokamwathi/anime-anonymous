@@ -212,7 +212,7 @@ class FusionTable {
     <?php
 	if (is_string($_REQUEST['id'])){
 	$whereClause = "WHERE mal_id = '".$_REQUEST['id']."'";	
-	$sql="SELECT 'title', 'anime_type', 'episodes', 'synopsis', 'mal_score', 'mal_image','mal_id','start_date','end_date','synonyms' FROM 1409399 ".$whereClause;
+	$sql="SELECT 'anime_type', 'episodes', 'synopsis', 'mal_score', 'mal_image','mal_id','start_date','end_date','synonyms','title' FROM 1409399 ".$whereClause;
 	$token = GoogleClientLogin("labwax@gmail.com", "xdexters231###", "fusiontables"); 
 	$ft = new FusionTable($token);
 	$output = $ft->query($sql);
@@ -467,7 +467,7 @@ topList  += '</div>';
   for(i = 0; i < numRows; i++) {
     //for(j = 0; j < numCols-1; j++) {
  var q = i+1;
- var pq = 100;
+ var pq = 30;
  var title = response.getDataTable().getValue(i, 0);
  var anime_type = response.getDataTable().getValue(i, 1);
  var episodes = response.getDataTable().getValue(i, 2);
@@ -498,7 +498,7 @@ stx = synopsis ;
  fusiontabledata += '<td class="borderClass" style="border-width: 0 0 1px 0;" align="center" valign="top" width="'+pq+'">';
  fusiontabledata += '<span style="font-weight: bold; font-size: 24px;" class="lightLink">'+q+'</span></td>';
  }
- fusiontabledata += '<td class="borderClass" align="center" valign="top" width="100">';
+ fusiontabledata += '<td class="borderClass" align="center" valign="top" width="50px">';
  fusiontabledata += '<div class="picSurround">';
  fusiontabledata += '<a href="?id='+crc_code+'&name='+titleURL+'" class="hoverinfo_trigger" id="#area5114" rel="#info5114">';
  fusiontabledata += '<img src="'+imgstr+'t.jpg" border="0">';
