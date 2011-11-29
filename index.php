@@ -90,16 +90,17 @@ class FusionTable {
 			//$results = preg_split("/\n/", curl_exec ($c));
 			$fields = 'anime_type,episodes,synopsis,mal_score,mal_image,mal_id,start_date,end_date,synonyms,title';
 			$str = curl_exec ($c);
-			$str = substr($str,strlen($fields));
-			$str = str_replace('\n',' ',$str);
-			$str = str_replace('<br />',' ',$str);
-			$str = str_replace('href','link',$str);
-			$str = trim( preg_replace( '/\s+/', ' ', $str ) );
-			$str = $fields."\n".$str;
-			$results = preg_split("/\n/", $str);
+			//$str = substr($str,strlen($fields));
+			//$str = str_replace('\n',' ',$str);
+			//$str = str_replace('<br />',' ',$str);
+			//$str = str_replace('href','link',$str);
+			//$str = trim( preg_replace( '/\s+/', ' ', $str ) );
+			//$str = $fields."\n".$str;
+			//$results = preg_split("/\n/", $str);
+			$results = preg_split("/\n/", $fields."\n".str_replace('\n',' ',substr(curl_exec ($c),strlen($fields))));
 			//$results = preg_split(",", $results);
 			//echo("<br/>It was me<br/><pre>");
-			print_r($str);
+			//print_r($str);
 			print_r($results);
 			//echo("</pre><br/>");
 			// If we got an error, raise it
