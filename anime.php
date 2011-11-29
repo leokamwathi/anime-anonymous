@@ -3,12 +3,62 @@
 <div id="ftdata">Loading Anime Info...<img border="0" height="21" src="http://1.bp.blogspot.com/-_jr8U-tayi0/Tm-PG9zwqAI/AAAAAAAAATM/xkxNHb_R7Gs/s400/indicator-u.gif" width="21" /></div>
 
 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<div id="fb-root"></div>
+<script type="text/javascript" id="fbscript">
+function fbinit(){
+  window.fbAsyncInit = function() {
+    FB.init({appId: '39732531101', status: true, cookie: true, xfbml: true});
+	FB.Event.subscribe('edge.create', function(response) {
+		//alert('You liked the URL: ' + response);
+
+//publishing
+
+/*
+title = response.getDataTable().getValue(0, 0);
+	anime_type = response.getDataTable().getValue(0, 1);
+	episodes = response.getDataTable().getValue(0, 2);
+	synopsis = response.getDataTable().getValue(0, 3);
+	titleURL = encodeURIComponent(title);
+        cleanSynopsis = synopsis; 
+
+*/
+var anipath = 'http://apps.facebook.com/anime-anonymous/?id='+animeID+'&name='+titleURL; 
+FB.ui(
+  {
+    method: 'feed',
+    name: title,
+    link: anipath ,
+    picture: animeImg+'t.jpg',
+    caption: title,
+    description: synopsis
+  },
+  function(response) {
+    if (response && response.post_id) {
+     // alert('Post was published.');
+    } else {
+     // alert('Post was not published.');
+    }
+  }
+);
+
+//end pub
+
+	});
+	
+  };
+  (function() {
+    var e = document.createElement('script'); e.async = true;
+    e.src = document.location.protocol +'//connect.facebook.net/en_US/all.js';
+    document.getElementById('fb-root').appendChild(e);
+  }());
+}
+</script>
 <script type="text/javascript" id="script">
 //http://google-plus-blogger-template.blogspot.com/
 google.load('visualization', '1');
 
 
-var title;
+	var title;
 	var anime_type;
 	var episodes;
 	var synopsis;
