@@ -208,6 +208,50 @@ class FusionTable {
 ?>
 <html>
 <head>
+   <meta charset="utf-8"/>
+    <?php
+	if (is_string($_REQUEST['id'])){
+	$whereClause = "WHERE mal_id = '".$_REQUEST['id']."'";	
+	$sql="SELECT 'title', 'anime_type', 'episodes', 'synopsis', 'mal_score', 'mal_image','mal_id','start_date','end_date','synonyms' FROM 1409399 ".$whereClause;
+	$token = GoogleClientLogin("labwax@gmail.com", "xdexters231###", "fusiontables"); 
+	$ft = new FusionTable($token);
+	$output = $ft->query($sql);
+	if($output){
+	echo('<meta property="og:title" content="'.$output[0]['title'].'"/>
+    <meta property="og:type" content="tv_show"/>
+    <meta property="og:url" content="http://apps.facebook.com/anime-anonymous/?id='.$_REQUEST['id'].'"/>
+	<meta property="og:site_url" content="http://apps.facebook.com/anime-anonymous/?id='.$_REQUEST['id'].'"/>
+    <meta property="og:image" content="'.$output[0]['mal_image'].'"/>
+    <meta property="og:site_name" content="Anime Anonymous"/>
+	<meta property="fb:app_id" content="39732531101"/>
+	<meta property="fb:admins" content="505625483"/>
+	<meta property="fb:admin" content="505625483"/>
+    <meta property="og:description" content="'.$output[0]['synopsis'].'"/>');
+	}else{
+	echo('<meta property="og:title" content="Anime Anonymous"/>
+    <meta property="og:type" content="tv_show"/>
+    <meta property="og:url" content="http://apps.facebook.com/anime-anonymous/"/>
+	<meta property="og:site_url" content="http://apps.facebook.com/anime-anonymous/"/>
+    <meta property="og:image" content="https://fbcdn-photos-a.akamaihd.net/photos-ak-snc1/v43/53/39732531101/app_1_39732531101_48.gif"/>
+    <meta property="og:site_name" content="Anime Anonymous"/>
+	<meta property="fb:app_id" content="39732531101"/>
+	<meta property="fb:admins" content="505625483"/>
+	<meta property="fb:admin" content="505625483"/>
+    <meta property="og:description" content="With a database of over 3,000+ anime & pictures. Create a list of your favorite anime and share it with your friends.This is what every anime fan has been waiting for."/>');
+	}
+	}else{
+echo('<meta property="og:title" content="Anime Anonymous"/>
+    <meta property="og:type" content="tv_show"/>
+    <meta property="og:url" content="http://apps.facebook.com/anime-anonymous/"/>
+	<meta property="og:site_url" content="http://apps.facebook.com/anime-anonymous/"/>
+    <meta property="og:image" content="https://fbcdn-photos-a.akamaihd.net/photos-ak-snc1/v43/53/39732531101/app_1_39732531101_48.gif"/>
+    <meta property="og:site_name" content="Anime Anonymous"/>
+	<meta property="fb:app_id" content="39732531101"/>
+	<meta property="fb:admins" content="505625483"/>
+	<meta property="fb:admin" content="505625483"/>
+    <meta property="og:description" content="With a database of over 3,000+ anime & pictures. Create a list of your favorite anime and share it with your friends.This is what every anime fan has been waiting for."/>');
+	}
+	?>
 <link rel="stylesheet" href="http://aagmjc5n.facebook.joyent.us/anime.anonymous/animeanonymousstyle.v1.0.css" type="text/css" />
 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
 <script type="text/javascript" id="fbscript">
