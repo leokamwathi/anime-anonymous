@@ -162,7 +162,7 @@ stx = synopsis ;
 		var end_date = "";
 	}
 var fusiontabledata = "";
-fusiontabledata += '<h2 style="font-size: 20px;">'+title+'<div><fb:like href="http://apps.facebook.com/anime-anonymous/anime.php?id='+mal_id +'" send="true" width="700" show_faces="false" font=""></fb:like></div></h2>';
+fusiontabledata += '<h2 style="font-size: 20px;">'+title+'<div><fb:like href="http://apps.facebook.com/anime-anonymous/?id='+mal_id +'" send="true" width="700" show_faces="false" font=""></fb:like></div></h2>';
 fusiontabledata += '<div><div><table border="0" width="100%" cellspacing="3" style="float: left">';
 fusiontabledata += '<tr><td align="left" valign="top" colspan="2"><div id="leftbody"></div>';
 fusiontabledata += '</td></tr><tr><td width="210" align="left" valign="top"><table border="0" width="100%" cellspacing="3" cellpadding="3"><tr><td style="border-style: solid; border-width: 0px" bordercolor="#f7f7f7">';
@@ -212,7 +212,7 @@ fusiontabledata += '%Get fans List%';
 */
 
 fusiontabledata += '<h2>Facebook Comments</h2>';
-fusiontabledata += '<fb:comments href="anime.php?id='+mal_id  +'" num_posts="2" width="500" xid="'+mal_id+'"_anime></fb:comments>';
+fusiontabledata += '<fb:comments href="http://apps.facebook.com/anime-anonymous/?id='+mal_id  +'" num_posts="2" width="500" xid="'+mal_id+'"_anime></fb:comments>';
 fusiontabledata += '</td></tr></table>';
 fusiontabledata += '</tr></table></td></tr></table>';
 
