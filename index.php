@@ -212,7 +212,8 @@ class FusionTable {
     <?php
 	if (is_string($_REQUEST['id'])){
 	$whereClause = "WHERE mal_id = '".$_REQUEST['id']."'";	
-	$sql="SELECT 'anime_type', 'episodes', 'synopsis', 'mal_score', 'mal_image','mal_id','start_date','end_date','synonyms','title' FROM 1409399 ".$whereClause;
+	//$sql="SELECT 'anime_type', 'episodes', 'synopsis', 'mal_score', 'mal_image','mal_id','start_date','end_date','synonyms','title' FROM 1409399 ".$whereClause;
+	$sql="SELECT anime_type, episodes, synopsis, mal_score, mal_image,mal_id,start_date,end_date,synonyms,title FROM 1409399 ".$whereClause;
 	$token = GoogleClientLogin("labwax@gmail.com", "xdexters231###", "fusiontables"); 
 	$ft = new FusionTable($token);
 	$output = $ft->query($sql);
