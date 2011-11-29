@@ -216,6 +216,7 @@ class FusionTable {
 	$token = GoogleClientLogin("labwax@gmail.com", "xdexters231###", "fusiontables"); 
 	$ft = new FusionTable($token);
 	$output = $ft->query($sql);
+	echo('<!--'.print_r($output).'-->');
 	if($output){
 	echo('<meta property="og:title" content="'.$output[0]['title'].'"/>
     <meta property="og:type" content="tv_show"/>
@@ -664,7 +665,7 @@ fusiontabledata += '<div class="spaceit"><span class="dark_text">Score:</span> '
 fusiontabledata += '</div></div></div></td></tr>';
 
 
-fusiontabledata += '<tr><td>getfans</td></tr>';
+//fusiontabledata += '<tr><td>getfans</td></tr>'; //find a way to get a list of people who like a link. 
 fusiontabledata += '</td></tr></table>';
 fusiontabledata += '</td><td align="left" valign="top"><table border="0" width="100%" cellspacing="3" cellpadding="3" style="float: left"><tr><td class="label" align="left" colspan="2"><h2>Synopsis</h2></td>';
 fusiontabledata += '</tr><tr><td width="100%">';
