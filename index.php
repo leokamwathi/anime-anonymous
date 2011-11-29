@@ -89,6 +89,8 @@ class FusionTable {
 			
 			//$results = preg_split("/\n/", curl_exec ($c));
 			$results = curl_exec ($c);
+			$results = trim( preg_replace( '/\s+/', ' ', $results ) );
+			$results = preg_split("/\n/", $results);
 			//echo("<br/>It was me<br/><pre>");
 			print_r($results);
 			//echo("</pre><br/>");
