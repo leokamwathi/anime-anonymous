@@ -1,12 +1,219 @@
+<?php
+
+// Include this function on your pages
+
+
+// At the beginning of each page call these two functions
+ob_start();
+ob_implicit_flush(0);
+// Then do everything you want to do on the page
+
+ $cache_expire = 60*60*24*365;
+ header("Pragma: public");
+ header("Cache-Control: max-age=".$cache_expire);
+ header('Expires: ' . gmdate('D, d M Y H:i:s', time()+$cache_expire) . ' GMT');
+ header('X-Frame-Options: GOFORIT'); 
+ 
+ function print_gzipped_page() {
+
+    global $HTTP_ACCEPT_ENCODING;
+    if( headers_sent() ){
+        $encoding = false;
+    }elseif( strpos($HTTP_ACCEPT_ENCODING, 'x-gzip') !== false ){
+        $encoding = 'x-gzip';
+    }elseif( strpos($HTTP_ACCEPT_ENCODING,'gzip') !== false ){
+        $encoding = 'gzip';
+    }else{
+        $encoding = false;
+    }
+
+    if( $encoding ){
+        $contents = ob_get_contents();
+        ob_end_clean();
+        header('Content-Encoding: '.$encoding);
+        print("\x1f\x8b\x08\x00\x00\x00\x00\x00");
+        $size = strlen($contents);
+        $contents = gzcompress($contents, 9);
+        $contents = substr($contents, 0, $size);
+        print($contents);
+        exit();
+    }else{
+        ob_end_flush();
+        exit();
+    }
+}
+ 
+function GoogleClientLogin($username, $password, $service) {
+	// Check that we have all the parameters
+	if(!$username || !$password || !$service) {
+		throw new Exception("You must provide a username, password, and service when creating a new GoogleClientLogin.");
+	}
+	
+	// Set up the post body
+	$body = "accountType=GOOGLE &Email=$username&Passwd=$password&service=$service";
+	
+	// Set up the cURL
+	$c = curl_init ("https://www.google.com/accounts/ClientLogin");
+	curl_setopt($c, CURLOPT_POST, true);
+	curl_setopt($c, CURLOPT_POSTFIELDS, $body);
+	curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
+	$response = curl_exec($c);
+	
+	// Parse the response to obtain just the Auth token
+	// Basically, we remove everything before the "Auth="
+	return preg_replace("/[\s\S]*Auth=/", "", $response);
+}
+
+class FusionTable {
+	var $token;
+	
+	function FusionTable($token) {
+		if (!$token) {
+			throw new Exception("You must provide a token when creating a new FusionTable.");		
+		}
+		$this->token = $token;
+	}
+	
+	function query($query) {
+		if(!$query) {
+			throw new Exception("query method requires a query.");
+		}
+		// Check to see if we have a query that will retrieve data
+		if(preg_match("/^select|^show tables|^describe/i", $query)) {
+			$request_url = "http://tables.googlelabs.com/api/query?sql=" . urlencode($query);
+			$c = curl_init ($request_url);
+			curl_setopt($c, CURLOPT_HTTPHEADER, array("Authorization: GoogleLogin auth=" . $this->token));
+			curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
+			
+			// Place the lines of the output into an array
+			
+			$results = preg_split("/\n/", curl_exec ($c));
+			//echo("<br/>It was me<br/><pre>");
+			//print_r($results);
+			//echo("</pre><br/>");
+			// If we got an error, raise it
+			if(curl_getinfo($c, CURLINFO_HTTP_CODE) != 200) {
+				return $this->output_error($results);
+			}
+
+			// Drop the last (empty) array value
+			array_pop($results);
+			
+			// Parse the output
+			return $this->parse_output($results);
+		}
+		// Otherwise we are going to be updating the table, so we need to the POST method
+		else if(preg_match("/^update|^delete|^insert/i", $query)) {
+			// Set up the cURL
+			$body = "sql=" . urlencode($query);
+			$c = curl_init ("http://tables.googlelabs.com/api/query");
+			curl_setopt($c, CURLOPT_POST, true);
+			curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($c, CURLOPT_HTTPHEADER, array(
+				"Content-length: " . strlen($body),
+				"Content-type: application/x-www-form-urlencoded",
+				"Authorization: GoogleLogin auth=" . $this->token . " "		// I don't know why, but unless I add extra characters after the token, I get this error: Syntax error near line 1:1: unexpected token: null
+			));
+			curl_setopt($c, CURLOPT_POSTFIELDS, $body);
+			
+			// Place the lines of the output into an array
+			$results = preg_split("/\n/", curl_exec ($c));
+			
+			// If we got an error, raise it
+			if(curl_getinfo($c, CURLINFO_HTTP_CODE) != 200) {
+				return $this->output_error($results);
+			}
+
+			// Drop the last (empty) array value
+			array_pop($results);
+			
+			return $this->parse_output($results);
+		}
+		else {
+			throw new Exception("Unknown SQL query submitted.");
+		}
+	}
+	
+	private function parse_output($results) {
+		$headers = false;
+		$output = array();
+		foreach($results as $row) {
+			// Get the headers
+			if(!$headers) {
+				$headers = $this->parse_row($row);
+			}
+			else {
+				// Create a new row for the array
+				$newrow = array();
+				$values = $this->parse_row($row);
+				
+				// Build an associative array, using the headers for the association
+				foreach($headers as $index => $header) {
+					$newrow[$header] = $values[$index];
+				}
+				
+				// Add the new array to the output array
+				array_push($output, $newrow);
+			}
+		}
+		
+		// Return the output
+		return $output;
+	}
+	/*
+	private function parse_row($row) {
+		// Split the comma delimted row
+		$cells = preg_split("/,/", $row);
+		
+		// Go through each cell and see if we encounter a double quote
+		foreach($cells as $index => $value) {
+			// When we encounter a double quote at the start of a cell, we've got a quoted string
+			if(preg_match("/^\"/", $value)) {
+				// Concatenate the value with the next cell and remove the double quotes
+				$cells[$index] = preg_replace("/^\"|\"$/", "", $cells[$index] . $cells[$index+1]);
+				
+				// Drop the next cell from the array
+				array_splice($cells, $index+1, 1);
+			}
+		}
+		return $cells;
+	}
+	*/
+	
+	
+	 private function parse_row($row)
+    {
+        // Split the comma delimted row
+        $cells = preg_split("/,(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))/", $row);
+        // Loop over each column and remove ending double-quotes and white-space
+        foreach( $cells as $k => $v )
+            $cells[$k] = trim($v, '"');
+            
+        return $cells;
+    }
+	
+	private function output_error($err) {
+		$err = implode("", $err);
+		
+		// Remove everything outside of the H1 tag
+		$err = preg_replace("/[\s\S]*<H1>|<\/H1>[\s\S]*/i", "", $err);
+		
+		// Return the error
+		return $err;
+		
+		// Eventually we'll just throw the error rather than return the error output
+		throw new Exception($err);
+	}
+}
+?>
+<html>
+<head>
 <link rel="stylesheet" href="http://aagmjc5n.facebook.joyent.us/anime.anonymous/animeanonymousstyle.v1.0.css" type="text/css" />
-
-<div id="ftdata">Loading Anime List...<img border="0" height="21" src="http://1.bp.blogspot.com/-_jr8U-tayi0/Tm-PG9zwqAI/AAAAAAAAATM/xkxNHb_R7Gs/s400/indicator-u.gif" width="21" /></div>
-
 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
-<div id="fb-root"></div>
 <script type="text/javascript" id="fbscript">
 function fbinit(){
   window.fbAsyncInit = function() {
+	FB.Canvas.setAutoResize();
     FB.init({appId: '39732531101', status: true, cookie: true, xfbml: true});
 	FB.Event.subscribe('edge.create', function(response) {
 		//alert('You liked the URL: ' + response);
@@ -342,8 +549,44 @@ stx = synopsis ;
 	}else{
 		var end_date = "";
 	}
+	
+	  var topList = ""
+
+topList  += '<div id="horiznav_nav" style="margin: 5px 0 10px 0;">';
+topList  += '<ul style="margin-right: 0; padding-right: 0;">';
+topList  += '<li><a href="?ani=top" class="horiznav_active">TOP</a></li>';
+topList  += '<li><a href="?ani=0-9">0-9</a></li>';
+topList  += '<li><a href="?ani=A">A</a></li>';
+topList  += '<li><a href="?ani=B">B</a></li>';
+topList  += '<li><a href="?ani=C">C</a></li>';
+topList  += '<li><a href="?ani=D">D</a></li>';
+topList  += '<li><a href="?ani=E">E</a></li>';
+topList  += '<li><a href="?ani=F">F</a></li>';
+topList  += '<li><a href="?ani=G">G</a></li>';
+topList  += '<li><a href="?ani=H">H</a></li>';
+topList  += '<li><a href="?ani=I">I</a></li>';
+topList  += '<li><a href="?ani=J">J</a></li>';
+topList  += '<li><a href="?ani=K">K</a></li>';
+topList  += '<li><a href="?ani=L">L</a></li>';
+topList  += '<li><a href="?ani=M">M</a></li>';
+topList  += '<li><a href="?ani=N">N</a></li>';
+topList  += '<li><a href="?ani=O">O</a></li>';
+topList  += '<li><a href="?ani=P">P</a></li>';
+topList  += '<li><a href="?ani=Q">Q</a></li>';
+topList  += '<li><a href="?ani=R">R</a></li>';
+topList  += '<li><a href="?ani=S">S</a></li>';
+topList  += '<li><a href="?ani=T">T</a></li>';
+topList  += '<li><a href="?ani=U">U</a></li>';
+topList  += '<li><a href="?ani=V">V</a></li>';
+topList  += '<li><a href="?ani=W">W</a></li>';
+topList  += '<li><a href="?ani=X">X</a></li>';
+topList  += '<li><a href="?ani=Y">Y</a></li>';
+topList  += '<li><a href="?ani=Z">Z</a></li>';
+topList  += '</ul>';
+topList  += '</div>';
+	
 var fusiontabledata = "";
-fusiontabledata += '<h2 style="font-size: 20px;">'+title+'<div><fb:like href="http://apps.facebook.com/anime-anonymous/?id='+mal_id +'" send="true" width="700" show_faces="false" font=""></fb:like></div></h2>';
+fusiontabledata += topList+'<br/><h2 style="font-size: 20px;">'+title+'<div><fb:like href="http://apps.facebook.com/anime-anonymous/?id='+mal_id +'" send="true" width="700" show_faces="false" font=""></fb:like></div></h2>';
 fusiontabledata += '<div><div><table border="0" width="100%" cellspacing="3" style="float: left">';
 fusiontabledata += '<tr><td align="left" valign="top" colspan="2"><div id="leftbody"></div>';
 fusiontabledata += '</td></tr><tr><td width="210" align="left" valign="top"><table border="0" width="100%" cellspacing="3" cellpadding="3"><tr><td style="border-style: solid; border-width: 0px" bordercolor="#f7f7f7">';
@@ -404,16 +647,17 @@ document.getElementById('ftdata').innerHTML = fusiontabledata;
 try
   {
 fbinit();
-RW_Async_Init();
 
 //alert("Wish me luck");
-var i, refAttr;
-var metaTags = document.getElementsByTagName('meta');
+
 //alert("we did it"+metaTags.length);
 }catch(er){
 //nothing to see here
 //alert(er.description);
 }
+/*
+var i, refAttr;
+var metaTags = document.getElementsByTagName('meta');
 for (i in metaTags) {
 try
   {
@@ -438,7 +682,14 @@ try
 //alert(er.message);
 }	
 }
+*/
 }
 
 </script>
-<body onload="getData();"/>
+</head>
+<body onload="getData();">
+<div id="fb-root"></div>
+<div id="ftdata">Loading Anime List...<img border="0" height="21" src="http://1.bp.blogspot.com/-_jr8U-tayi0/Tm-PG9zwqAI/AAAAAAAAATM/xkxNHb_R7Gs/s400/indicator-u.gif" width="21" /></div>
+
+</body>
+</html>
