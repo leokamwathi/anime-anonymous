@@ -793,7 +793,7 @@ String.prototype.br2nl = function() {
 }
 </style>
 </head>
-<body onload="getData();" style="background-color: #666666;" >
+<body onload="getData();" style="background-color: #f7f7f7;" >
 <div id="wrap" >
 <div id="fb-root"></div>
 <div id="ftdata">Loading Anime List...<img border="0" height="21" src="http://1.bp.blogspot.com/-_jr8U-tayi0/Tm-PG9zwqAI/AAAAAAAAATM/xkxNHb_R7Gs/s400/indicator-u.gif" width="21" /></div>
