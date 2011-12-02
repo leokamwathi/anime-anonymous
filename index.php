@@ -283,47 +283,46 @@ echo('<meta property="og:title" content="Anime Anonymous"/>
 <link rel="stylesheet" href="stylesheets/animeanonymousstyle.v1.0.css" type="text/css" />
 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
 <script type="text/javascript" id="fbscript">
+var myUID;
+var myName;
+var myImg;
+var title;
+var anime_type;
+var episodes;
+var synopsis;
+var titleURL;
+var mal_score;
+var imgstr;
+var mal_id;
+var sdate;
+var edate;
+var synonyms;
 function fbinit(){
   window.fbAsyncInit = function() {
 	FB.Canvas.setAutoResize();
     FB.init({appId: '39732531101', status: true, cookie: true, xfbml: true});
 	FB.Event.subscribe('edge.create', function(response) {
-		//alert('You liked the URL: ' + response);
-
-//publishing
-
-/*
-title = response.getDataTable().getValue(0, 0);
-	anime_type = response.getDataTable().getValue(0, 1);
-	episodes = response.getDataTable().getValue(0, 2);
-	synopsis = response.getDataTable().getValue(0, 3);
-	titleURL = encodeURIComponent(title);
-        cleanSynopsis = synopsis; 
-
-*/
-var anipath = 'http://apps.facebook.com/anime-anonymous/?id='+animeID+'&name='+titleURL; 
-FB.ui(
-  {
-    method: 'feed',
-    name: title,
-    link: anipath ,
-    picture: animeImg+'t.jpg',
-    caption: title,
-    description: synopsis
-  },
-  function(response) {
-    if (response && response.post_id) {
-     // alert('Post was published.');
-    } else {
-     // alert('Post was not published.');
-    }
-  }
-);
-
-//end pub
-
+		becomeFan();
 	});
-	
+					FB.api('/me', function(response) {
+				//if(getParameterByName("debug")){
+				console.log(response);
+				myUID = response.id;
+				myName = response.name;
+				myImg = "https://graph.facebook.com/"+ myUID +"/picture?type=normal";
+				//}
+				/*
+			    var query = FB.Data.query('select uid, name, hometown_location, sex, pic_square from user where uid={0}', response.id);
+				query.wait(function(rows) {
+				 myUID = rows[0].uid ;
+				 myName = rows[0].name ;
+				 myImg = rows[0].pic_square ;
+				 //document.getElementById('login').style.display = "block";
+				 //document.getElementById('login').innerHTML = response.name + " succsessfully logged in! -> " + myUID;
+				
+			 });
+			 */
+		});
   };
   (function() {
     var e = document.createElement('script'); e.async = true;
@@ -338,7 +337,26 @@ google.load('visualization', '1');
 var counter = false;
 var mytitle = '<h2><div style="float: right;"></div>TOP 100 Anime</h2>';
 //mytitle = 'TOP 100 Anime List';
-
+function becomeFan(){
+	var anipath = 'http://apps.facebook.com/anime-anonymous/?id='+mal_id+'&name='+titleURL; 
+FB.ui(
+  {
+    method: 'feed',
+    name:  myname+" is now a fan of "+title,
+    link: anipath ,
+    picture: animeImg+'t.jpg',
+    caption: myname+" become a fan of "+title,
+    description: synopsis
+  },
+  function(response) {
+    if (response && response.post_id) {
+     // alert('Post was published.');
+    } else {
+     // alert('Post was not published.');
+    }
+  }
+);
+}
 function getData() {
 if(getParameterByName("id")){
  //window.location.href = "?id="+getParameterByName("id");
@@ -495,11 +513,11 @@ topList  += '</div>';
     //for(j = 0; j < numCols-1; j++) {
  var q = i+1;
  var pq = 30;
- var title = response.getDataTable().getValue(i, 0);
- var anime_type = response.getDataTable().getValue(i, 1);
- var episodes = response.getDataTable().getValue(i, 2);
- var synopsis = response.getDataTable().getValue(i, 3);
- var titleURL = encodeURIComponent(title);
+ title = response.getDataTable().getValue(i, 0);
+ anime_type = response.getDataTable().getValue(i, 1);
+ episodes = response.getDataTable().getValue(i, 2);
+ synopsis = response.getDataTable().getValue(i, 3);
+ titleURL = encodeURIComponent(title);
  var stx = synopsis;
  synopsis = synopsis.nl2br('<br/>');
 while(synopsis==stx){
@@ -519,8 +537,8 @@ stx = synopsis ;
 
  synopsis = synopsis.substr(0,150);
 
- var mal_score = response.getDataTable().getValue(i, 4);
- var imgstr = response.getDataTable().getValue(i, 5);
+ mal_score = response.getDataTable().getValue(i, 4);
+ imgstr = response.getDataTable().getValue(i, 5);
  imgstr = imgstr.substr(0,(imgstr.length-4));
  
  var crc_code = response.getDataTable().getValue(i, 6);
@@ -603,15 +621,15 @@ stx = synopsis ;
 }
 }
 	
-	var mal_score = response.getDataTable().getValue(0, 4);
-	var imgstr = response.getDataTable().getValue(0, 5);
+	 mal_score = response.getDataTable().getValue(0, 4);
+	 imgstr = response.getDataTable().getValue(0, 5);
 	imgstr = imgstr.substr(0,(imgstr.length-4));
         animeImg = imgstr;
 	thumbImg = imgstr+"t.jpg";
-	var mal_id = response.getDataTable().getValue(0, 6);
-	var sdate = response.getDataTable().getValue(0, 7);
-	var edate = response.getDataTable().getValue(0, 8);
-	var synonyms = title; + ' , ' + response.getDataTable().getValue(0, 9);
+	mal_id = response.getDataTable().getValue(0, 6);
+	sdate = response.getDataTable().getValue(0, 7);
+	edate = response.getDataTable().getValue(0, 8);
+	synonyms = title; + ' , ' + response.getDataTable().getValue(0, 9);
 	animeID = mal_id;
 	if (sdate){
 		var start_date = new Date(sdate).toDateString();
@@ -667,7 +685,7 @@ fusiontabledata += '<tr><td align="left" valign="top" colspan="2"><div id="leftb
 fusiontabledata += '</td></tr><tr><td width="210" align="left" valign="top"><table border="0" width="100%" cellspacing="3" cellpadding="3"><tr><td style="border-style: solid; border-width: 0px" bordercolor="#f7f7f7">';
 fusiontabledata += '<div class="picSurround"><img border="0" src="'+ imgstr +'.jpg"></div>';
 
-fusiontabledata += '<div><a href="" class="buttonLinx" onclick="recommend();">Recommend To Friends</a></div>';
+fusiontabledata += '<div><a href="#" class="buttonLinx" onclick="recommend();">Recommend To Friends</a></div>';
 //fusiontabledata += '<div><a href="#addtolistanchor" onclick="Add2Favorite("watched",'+mal_id +');">Add to Favorites</a></div>';
 
 fusiontabledata += '<h2>Anime Rating</h2>';
