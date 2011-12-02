@@ -783,9 +783,9 @@ try
 
 function recommend() {
 FB.getLoginStatus(function(response) {
-var myMessage = myName + " has recommended you to check out "+name;
+var myMessage = myName + " has recommended you to check out "+title;
 var myData = mal_id;
-var myTitle = "Recommend "+name+" to your friends"
+var myTitle = "Recommend "+title+" to your friends"
 if(getParameterByName("debug")){
 			console.log(response);
 		}
