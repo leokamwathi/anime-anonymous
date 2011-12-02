@@ -783,10 +783,20 @@ String.prototype.br2nl = function() {
 	return this.replace( /\<br(\s*\/|)\>/g, nl );
 }
 </script>
+<style>
+#wrap { 
+  width: 765px; 
+  margin: 0 auto; 
+  /*overflow-y:auto;*/
+  /*overflow-x:auto;*/
+  /*height:100%;*/
+}
+</style>
 </head>
 <body onload="getData();">
+<div id="wrap" style="background-color: #333333;" >
 <div id="fb-root"></div>
 <div id="ftdata">Loading Anime List...<img border="0" height="21" src="http://1.bp.blogspot.com/-_jr8U-tayi0/Tm-PG9zwqAI/AAAAAAAAATM/xkxNHb_R7Gs/s400/indicator-u.gif" width="21" /></div>
-
+</div>
 </body>
 </html>
