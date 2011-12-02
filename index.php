@@ -280,7 +280,7 @@ echo('<meta property="og:title" content="Anime Anonymous"/>
     <meta property="og:description" content="With a database of over 3,000+ anime & pictures. Create a list of your favorite anime and share it with your friends.This is what every anime fan has been waiting for."/>');
 	}
 	?>
-<link rel="stylesheet" href="http://aagmjc5n.facebook.joyent.us/anime.anonymous/animeanonymousstyle.v1.0.css" type="text/css" />
+<link rel="stylesheet" href="stylesheets/animeanonymousstyle.v1.0.css" type="text/css" />
 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
 <script type="text/javascript" id="fbscript">
 function fbinit(){
