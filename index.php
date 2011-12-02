@@ -679,7 +679,7 @@ topList  += '</ul>';
 topList  += '</div>';
 	
 var fusiontabledata = "";
-fusiontabledata += topList+'<br/><div class="animeTitle" style="font-size: 20px; float: left;">'+title+'<fb:like href="http://apps.facebook.com/anime-anonymous/?id='+mal_id +'" send="true" width="700" show_faces="false" font=""></fb:like></div>';
+fusiontabledata += topList+'<br/><div class="animeTitle" >'+title+'</div><div style="float: left;"><fb:like href="http://apps.facebook.com/anime-anonymous/?id='+mal_id +'" send="true" width="700" show_faces="false" font=""></fb:like></div>';
 fusiontabledata += '<div><div><table border="0" width="100%" cellspacing="3" style="float: left;">';
 fusiontabledata += '<tr><td align="left" valign="top" colspan="2"><div id="leftbody"></div>';
 fusiontabledata += '</td></tr><tr><td width="210" align="left" valign="top"><table border="0" width="100%" cellspacing="3" cellpadding="3"><tr><td style="border-style: solid; border-width: 0px" bordercolor="#f7f7f7">';
