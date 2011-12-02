@@ -661,13 +661,13 @@ topList  += '</ul>';
 topList  += '</div>';
 	
 var fusiontabledata = "";
-fusiontabledata += topList+'<br/><h2 style="font-size: 20px; float: left;">'+title+'<fb:like href="http://apps.facebook.com/anime-anonymous/?id='+mal_id +'" send="true" width="700" show_faces="false" font=""></fb:like></h2>';
+fusiontabledata += topList+'<br/><div class="animeTitle" style="font-size: 20px; float: left;">'+title+'<fb:like href="http://apps.facebook.com/anime-anonymous/?id='+mal_id +'" send="true" width="700" show_faces="false" font=""></fb:like></div>';
 fusiontabledata += '<div><div><table border="0" width="100%" cellspacing="3" style="float: left;">';
 fusiontabledata += '<tr><td align="left" valign="top" colspan="2"><div id="leftbody"></div>';
 fusiontabledata += '</td></tr><tr><td width="210" align="left" valign="top"><table border="0" width="100%" cellspacing="3" cellpadding="3"><tr><td style="border-style: solid; border-width: 0px" bordercolor="#f7f7f7">';
 fusiontabledata += '<div class="picSurround"><img border="0" src="'+ imgstr +'.jpg"></div>';
 
-//fusiontabledata += '<div><a href="#addtolistanchor" onclick=" getFavorites("watched");">Show Favorites</a></div>';
+fusiontabledata += '<div><a href="" class="buttonLinx" onclick="recommend();">Recommend To Friends</a></div>';
 //fusiontabledata += '<div><a href="#addtolistanchor" onclick="Add2Favorite("watched",'+mal_id +');">Add to Favorites</a></div>';
 
 fusiontabledata += '<h2>Anime Rating</h2>';
@@ -761,6 +761,24 @@ try
 }
 */
 }
+
+function recommend() {
+FB.getLoginStatus(function(response) {
+var myMessage = myName + " has recommended you to check out "+name;
+var myData = mal_id;
+var myTitle = "Recommend "+name+" to your friends"
+if(getParameterByName("debug")){
+			console.log(response);
+		}
+  if (response.session) {
+FB.ui({method: 'apprequests', display: 'iframe', message: myMessage.substr(0,254), data: myData,title:myTitle.substr(0,49)});
+  } else {
+  //send to permission page
+    alert("You must be logged on to Facebook to do that.");
+  }
+});
+}
+
 String.prototype.nl2br = function() {
 	var br;
 	if( typeof arguments[0] != 'undefined' ) {
