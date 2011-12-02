@@ -803,7 +803,7 @@ String.prototype.br2nl = function() {
 </script>
 <style>
 #wrap { 
-  width: 765px; 
+  width: 900px; 
   margin: 0 auto; 
   /*overflow-y:auto;*/
   /*overflow-x:auto;*/
