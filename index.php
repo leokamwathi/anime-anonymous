@@ -259,7 +259,7 @@ class FusionTable {
 	<meta property="fb:app_id" content="39732531101"/>
 	<meta property="fb:admins" content="505625483"/>
 	<meta property="fb:admin" content="505625483"/>
-    <meta property="og:description" content="'.str_replace('<',' ',str_replace('>',' ',$output[0]['synopsis'])).'"/>');
+    <meta property="og:description" content="'.str_replace('<',' ',str_replace('>',' ',str_replace('&amp;','&',$output[0]['synopsis']))).'"/>');
 	}else{
 	echo('<meta property="og:title" content="Anime Anonymous"/>
     <meta property="og:type" content="tv_show"/>
