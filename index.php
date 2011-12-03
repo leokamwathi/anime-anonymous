@@ -543,6 +543,7 @@ while(synopsis==stx){
 
 synopsis = synopsis.replace("&lt;","<"); 
 synopsis = synopsis.replace("&gt;",">");
+synopsis = synopsis.replace("&amp;","&");
 synopsis = synopsis.replace('http://myanimelist.net/anime/',''); //http://anime-anonymous.herokuapp.com/%22http://myanimelist.net/anime/263/Hajime_no_Ippo%22
 synopsis = synopsis.replace('href="','href="http://apps.facebook.com/anime-anonymous/?q=');
 synopsis = synopsis.replace('href ="','href="http://apps.facebook.com/anime-anonymous/?q=');
@@ -632,8 +633,11 @@ stx = cleanSynopsis;
 stx = synopsis ;
 synopsis = synopsis.nl2br('<br/>');
 while(synopsis ==stx){
+//synopsis = synopsis.replace("&lt;","<"); 
+//synopsis = synopsis.replace("&gt;",">");
 synopsis = synopsis.replace("&lt;","<"); 
 synopsis = synopsis.replace("&gt;",">");
+synopsis = synopsis.replace("&amp;","&");
 synopsis = synopsis.replace("\n","<br/>");
 synopsis = synopsis.replace('http://myanimelist.net/anime/',''); //http://anime-anonymous.herokuapp.com/%22http://myanimelist.net/anime/263/Hajime_no_Ippo%22
 synopsis = synopsis.replace('href="','href="http://apps.facebook.com/anime-anonymous/?q=');
@@ -710,7 +714,7 @@ topList  += '</div>';
 	
 var fusiontabledata = "";
 //
-fusiontabledata += topList+'<br/><div class="animeTitle" >'+title+'</div><br/><div style="float: left;"><fb:like href="http://apps.facebook.com/anime-anonymous/?id='+mal_id +'" send="true" width="400" show_faces="false" font=""></fb:like></div>';
+fusiontabledata += topList+'<br/><div class="animeTitle" >'+title+'</div><br/><div style="float: left;"><fb:like href="http://apps.facebook.com/anime-anonymous/?id='+mal_id +'" send="true" width="800" show_faces="false" font=""></fb:like></div>';
 fusiontabledata += '<div><div><table border="0" width="100%" cellspacing="3" style="float: left;">';
 fusiontabledata += '<tr><td align="left" valign="top" colspan="2"><div id="leftbody"></div>';
 fusiontabledata += '</td></tr><tr><td width="210" align="left" valign="top"><table border="0" width="100%" cellspacing="3" cellpadding="3"><tr><td style="border-style: solid; border-width: 0px" bordercolor="#f7f7f7">';
