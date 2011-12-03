@@ -134,6 +134,7 @@ class FusionTable {
 				$fields = 'anime_type,episodes,synopsis,mal_score,mal_image,mal_id,start_date,end_date,synonyms,title';
 			$results = curl_exec ($c);
 			$results = substr($results,strlen($fields));
+			$results = str_replace('&amp;','&',$results);
 			$results = str_replace('\n',' ',$results);
 			$results = str_replace('<br />',' ',$results);
 			$results = str_replace('http://myanimelist.net/anime/','',$results); //http://anime-anonymous.herokuapp.com/%22http://myanimelist.net/anime/263/Hajime_no_Ippo%22
