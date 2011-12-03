@@ -136,7 +136,11 @@ class FusionTable {
 			$results = substr($results,strlen($fields));
 			$results = str_replace('\n',' ',$results);
 			$results = str_replace('<br />',' ',$results);
-			$results = str_replace('href','link',$results);
+			$results = str_replace('http://myanimelist.net/anime/','',$results); //http://anime-anonymous.herokuapp.com/%22http://myanimelist.net/anime/263/Hajime_no_Ippo%22
+			$results = str_replace('href="','href="http://apps.facebook.com/anime-anonymous/?q=',$results);
+			$results = str_replace('href ="','href="http://apps.facebook.com/anime-anonymous/?q=',$results);
+			$results = str_replace('href = "','href="http://apps.facebook.com/anime-anonymous/?q=',$results);
+			$results = str_replace('href= "','href="http://apps.facebook.com/anime-anonymous/?q=',$results);
 			$results = trim( preg_replace( '/\s+/', ' ', $results ) );
 			$results = $fields."\n".$results;
 			$results = preg_split("/\n/", $results);
@@ -245,7 +249,7 @@ class FusionTable {
 	$output = $ft->query($sql);
 	//echo('<!--'.htmlentities(print_r($output)).'-->');
 	if($output){
-	echo('<meta property="og:title" content="'.$output[0]['title'].'"/>
+	echo('<meta property="og:title" content="'.str_replace('<',' ',str_replace('>',' ',$output[0]['title'])).'"/>
     <meta property="og:type" content="tv_show"/>
     <meta property="og:url" content="http://apps.facebook.com/anime-anonymous/?id='.$_REQUEST['id'].'"/>
 	<meta property="og:site_url" content="http://apps.facebook.com/anime-anonymous/?id='.$_REQUEST['id'].'"/>
@@ -254,7 +258,7 @@ class FusionTable {
 	<meta property="fb:app_id" content="39732531101"/>
 	<meta property="fb:admins" content="505625483"/>
 	<meta property="fb:admin" content="505625483"/>
-    <meta property="og:description" content="'.htmlentities($output[0]['synopsis']).'"/>');
+    <meta property="og:description" content="'.str_replace('<',' ',str_replace('>',' ',$output[0]['synopsis'])).'"/>');
 	}else{
 	echo('<meta property="og:title" content="Anime Anonymous"/>
     <meta property="og:type" content="tv_show"/>
@@ -365,6 +369,20 @@ if(getParameterByName("id")){
 	var queryText = encodeURIComponent("SELECT 'title', 'anime_type', 'episodes', 'synopsis', 'mal_score', 'mal_image','mal_id','start_date','end_date','synonyms' FROM 1409399 " + whereClause);
 	var query = new google.visualization.Query('http://www.google.com/fusiontables/gvizdata?tq='  + queryText);
 	query.send(getAnime);
+}else if(getParameterByName("q")){
+	var findstr = getParameterByName("q");
+	var qArray = findstr.split("/");
+	if(qArray.lenth>0){
+		findstr = qArray[1];
+	}
+	//findstr = myReplace(findstr,"/"," ");
+	findstr = myReplace(findstr,"_"," ");
+	//var slash = findstr.indexOf("/");
+	//findstr = findstr.substr();
+	var whereClause = "Where title like '"+findstr+"' ORDER BY title ASC LIMIT 100";
+	var queryText = encodeURIComponent("SELECT 'title', 'anime_type', 'episodes', 'synopsis', 'mal_score', 'mal_image','mal_id','start_date','end_date','synonyms' FROM 1409399 " + whereClause);
+	var query = new google.visualization.Query('http://www.google.com/fusiontables/gvizdata?tq='  + queryText);
+	query.send(getAnime);
 }else{
 
 if(getParameterByName("ani")){
@@ -378,59 +396,59 @@ if (findchar=="TOP"){
   mytitle = 'TOP 100 Anime List';
   counter = true;
 }else if (findchar=="0-9"){
-  whereClause = "Where title >='0' and title < 'A' ORDER BY title DESC LIMIT 500";
+  whereClause = "Where title >='0' and title < 'A' ORDER BY title ASC LIMIT 500";
 }else if (findchar=="A"){
-  whereClause = "Where title >='A' and title < 'B' ORDER BY title DESC LIMIT 500";
+  whereClause = "Where title >='A' and title < 'B' ORDER BY title ASC LIMIT 500";
 }else if (findchar=="B"){
-  whereClause = "Where title >='B' and title < 'C' ORDER BY title DESC LIMIT 500";
+  whereClause = "Where title >='B' and title < 'C' ORDER BY title ASC LIMIT 500";
 }else if (findchar=="C"){
-  whereClause = "Where title >='C' and title < 'D' ORDER BY title DESC LIMIT 500";
+  whereClause = "Where title >='C' and title < 'D' ORDER BY title ASC LIMIT 500";
 }else if (findchar=="D"){
-  whereClause = "Where title >='D' and title < 'E' ORDER BY title DESC LIMIT 500";
+  whereClause = "Where title >='D' and title < 'E' ORDER BY title ASC LIMIT 500";
 }else if (findchar=="E"){
-  whereClause = "Where title >='E' and title < 'F' ORDER BY title DESC LIMIT 500";
+  whereClause = "Where title >='E' and title < 'F' ORDER BY title ASC LIMIT 500";
 }else if (findchar=="F"){
-  whereClause = "Where title >='F' and title < 'G' ORDER BY title DESC LIMIT 500";
+  whereClause = "Where title >='F' and title < 'G' ORDER BY title ASC LIMIT 500";
 }else if (findchar=="G"){
-  whereClause = "Where title >='G' and title < 'H' ORDER BY title DESC LIMIT 500";
+  whereClause = "Where title >='G' and title < 'H' ORDER BY title ASC LIMIT 500";
 }else if (findchar=="H"){
-  whereClause = "Where title >='H' and title < 'I' ORDER BY title DESC LIMIT 500";
+  whereClause = "Where title >='H' and title < 'I' ORDER BY title ASC LIMIT 500";
 }else if (findchar=="I"){
-  whereClause = "Where title >='I' and title < 'J' ORDER BY title DESC LIMIT 500";
+  whereClause = "Where title >='I' and title < 'J' ORDER BY title ASC LIMIT 500";
 }else if (findchar=="J"){
-  whereClause = "Where title >='J' and title < 'K' ORDER BY title DESC LIMIT 500";
+  whereClause = "Where title >='J' and title < 'K' ORDER BY title ASC LIMIT 500";
 }else if (findchar=="K"){
-  whereClause = "Where title >='K' and title < 'L' ORDER BY title DESC LIMIT 500";
+  whereClause = "Where title >='K' and title < 'L' ORDER BY title ASC LIMIT 500";
 }else if (findchar=="L"){
-  whereClause = "Where title >='L' and title < 'M' ORDER BY title DESC LIMIT 500";
+  whereClause = "Where title >='L' and title < 'M' ORDER BY title ASC LIMIT 500";
 }else if (findchar=="M"){
-  whereClause = "Where title >='M' and title < 'N' ORDER BY title DESC LIMIT 500";
+  whereClause = "Where title >='M' and title < 'N' ORDER BY title ASC LIMIT 500";
 }else if (findchar=="N"){
-  whereClause = "Where title >='N' and title < 'O' ORDER BY title DESC LIMIT 500";
+  whereClause = "Where title >='N' and title < 'O' ORDER BY title ASC LIMIT 500";
 }else if (findchar=="O"){
-  whereClause = "Where title >='O' and title < 'P' ORDER BY title DESC LIMIT 500";
+  whereClause = "Where title >='O' and title < 'P' ORDER BY title ASC LIMIT 500";
 }else if (findchar=="P"){
-  whereClause = "Where title >='P' and title < 'Q' ORDER BY title DESC LIMIT 500";
+  whereClause = "Where title >='P' and title < 'Q' ORDER BY title ASC LIMIT 500";
 }else if (findchar=="Q"){
-  whereClause = "Where title >='Q' and title < 'R' ORDER BY title DESC LIMIT 500";
+  whereClause = "Where title >='Q' and title < 'R' ORDER BY title ASC LIMIT 500";
 }else if (findchar=="R"){
-  whereClause = "Where title >='R' and title < 'S' ORDER BY title DESC LIMIT 500";
+  whereClause = "Where title >='R' and title < 'S' ORDER BY title ASC LIMIT 500";
 }else if (findchar=="S"){
-  whereClause = "Where title >='S' and title < 'T' ORDER BY title DESC LIMIT 500";
+  whereClause = "Where title >='S' and title < 'T' ORDER BY title ASC LIMIT 500";
 }else if (findchar=="T"){
-  whereClause = "Where title >='T' and title < 'U' ORDER BY title DESC LIMIT 500";
+  whereClause = "Where title >='T' and title < 'U' ORDER BY title ASC LIMIT 500";
 }else if (findchar=="U"){
-  whereClause = "Where title >='U' and title < 'V' ORDER BY title DESC LIMIT 500";
+  whereClause = "Where title >='U' and title < 'V' ORDER BY title ASC LIMIT 500";
 }else if (findchar=="V"){
-  whereClause = "Where title >='V' and title < 'W' ORDER BY title DESC LIMIT 500";
+  whereClause = "Where title >='V' and title < 'W' ORDER BY title ASC LIMIT 500";
 }else if (findchar=="W"){
-  whereClause = "Where title >='W' and title < 'X' ORDER BY title DESC LIMIT 500";
+  whereClause = "Where title >='W' and title < 'X' ORDER BY title ASC LIMIT 500";
 }else if (findchar=="X"){
-  whereClause = "Where title >='X' and title < 'Y' ORDER BY title DESC LIMIT 500";
+  whereClause = "Where title >='X' and title < 'Y' ORDER BY title ASC LIMIT 500";
 }else if (findchar=="Y"){
-  whereClause = "Where title >='Y' and title < 'Z' ORDER BY title DESC LIMIT 500";
+  whereClause = "Where title >='Y' and title < 'Z' ORDER BY title ASC LIMIT 500";
 }else if (findchar=="Z"){
-  whereClause = "Where title >='Z' and title < 'a' ORDER BY title DESC LIMIT 500";
+  whereClause = "Where title >='Z' and title < 'a' ORDER BY title ASC LIMIT 500";
 }else{
    whereClause = "ORDER BY mal_score DESC LIMIT 100";
    mytitle = 'TOP 100 Anime List';
@@ -444,8 +462,8 @@ if (findchar=="TOP"){
   var queryText = encodeURIComponent("SELECT 'title', 'anime_type', 'episodes', 'synopsis', 'mal_score', 'mal_image','mal_id' FROM 1409399 " + whereClause);
   var query = new google.visualization.Query('http://www.google.com/fusiontables/gvizdata?tq='  + queryText);
   query.send(getRows);
-  fbinit();
   }
+  fbinit();
 }
 
 function getParameterByName(name)
@@ -680,7 +698,7 @@ topList  += '</div>';
 	
 var fusiontabledata = "";
 //
-fusiontabledata += topList+'<br/><div class="animeTitle" >'+title+'</div><div style="float: left;"><fb:like href="http://apps.facebook.com/anime-anonymous/?id='+mal_id +'" send="true" width="400" show_faces="false" font=""></fb:like></div>';
+fusiontabledata += topList+'<br/><div class="animeTitle" >'+title+'</div><br/><div style="float: left;"><fb:like href="http://apps.facebook.com/anime-anonymous/?id='+mal_id +'" send="true" width="400" show_faces="false" font=""></fb:like></div>';
 fusiontabledata += '<div><div><table border="0" width="100%" cellspacing="3" style="float: left;">';
 fusiontabledata += '<tr><td align="left" valign="top" colspan="2"><div id="leftbody"></div>';
 fusiontabledata += '</td></tr><tr><td width="210" align="left" valign="top"><table border="0" width="100%" cellspacing="3" cellpadding="3"><tr><td style="border-style: solid; border-width: 0px" bordercolor="#f7f7f7">';
@@ -796,6 +814,23 @@ FB.ui({method: 'apprequests', display: 'iframe', message: myMessage.substr(0,254
     alert("You must be logged on to Facebook to do that.");
   }
 });
+}
+
+function myReplace(str,fstr,rstr){
+	var strx = str;
+	try{
+		while(str==stx){
+			str = str.replace(fstr,rstr); 
+			if(str ==stx){
+				stx = "macmendex";
+			}else{
+				stx = str;
+			}
+		}
+		return str;
+	}catch(err){
+		return "";
+	}
 }
 
 String.prototype.nl2br = function() {
