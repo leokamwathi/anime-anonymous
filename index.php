@@ -544,6 +544,12 @@ while(synopsis==stx){
 synopsis = synopsis.replace("&lt;","<"); 
 synopsis = synopsis.replace("&gt;",">");
 synopsis = synopsis.replace("&amp;","&");
+synopsis = synopsis.replace("\n","<br/>");
+synopsis = synopsis.replace("\r","<br/>");
+synopsis = synopsis.replace("\g","<br/>");
+synopsis = synopsis.replace(/\n/,"<br/>");
+synopsis = synopsis.replace(/\r/,"<br/>");
+synopsis = synopsis.replace(/\g/,"<br/>");
 synopsis = synopsis.replace('http://myanimelist.net/anime/',''); //http://anime-anonymous.herokuapp.com/%22http://myanimelist.net/anime/263/Hajime_no_Ippo%22
 synopsis = synopsis.replace('href="','href="http://apps.facebook.com/anime-anonymous/?q=');
 synopsis = synopsis.replace('href ="','href="http://apps.facebook.com/anime-anonymous/?q=');
@@ -639,6 +645,11 @@ synopsis = synopsis.replace("&lt;","<");
 synopsis = synopsis.replace("&gt;",">");
 synopsis = synopsis.replace("&amp;","&");
 synopsis = synopsis.replace("\n","<br/>");
+synopsis = synopsis.replace("\r","<br/>");
+synopsis = synopsis.replace("\g","<br/>");
+synopsis = synopsis.replace(/\n/,"<br/>");
+synopsis = synopsis.replace(/\r/,"<br/>");
+synopsis = synopsis.replace(/\g/,"<br/>");
 synopsis = synopsis.replace('http://myanimelist.net/anime/',''); //http://anime-anonymous.herokuapp.com/%22http://myanimelist.net/anime/263/Hajime_no_Ippo%22
 synopsis = synopsis.replace('href="','href="http://apps.facebook.com/anime-anonymous/?q=');
 synopsis = synopsis.replace('href ="','href="http://apps.facebook.com/anime-anonymous/?q=');
@@ -884,7 +895,7 @@ String.prototype.br2nl = function() {
 <body onload="getData();" style="background-color: #f7f7f7;" >
 <div id="wrap"  style="background-color: #ffffff;" >
 <div id="fb-root"></div>
-<div id="ftdata">Loading Anime List...<img border="0" height="21" src="http://1.bp.blogspot.com/-_jr8U-tayi0/Tm-PG9zwqAI/AAAAAAAAATM/xkxNHb_R7Gs/s400/indicator-u.gif" width="21" /></div>
+<div id="ftdata" style="background-color: #ffffff;">Loading Anime List...<img border="0" height="21" src="http://1.bp.blogspot.com/-_jr8U-tayi0/Tm-PG9zwqAI/AAAAAAAAATM/xkxNHb_R7Gs/s400/indicator-u.gif" width="21" /></div>
 </div>
 </body>
 </html>
