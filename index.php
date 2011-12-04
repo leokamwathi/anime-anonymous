@@ -868,7 +868,7 @@ topList  += '</div>';
 	
 var fusiontabledata = "";
 //
-fusiontabledata += topList+'<br/><div class="animeTitle" >'+title+'</div><br/><div style="float: left;"><fb:like href="http://apps.facebook.com/anime-anonymous/?id='+mal_id +'" send="true" width="800" show_faces="false" font=""></fb:like></div>';
+fusiontabledata += topList+'<br/><div class="animeTitle" >'+title+'</div><div><br/></div><div style="float: left;"><fb:like href="http://apps.facebook.com/anime-anonymous/?id='+mal_id +'" send="true" width="800" show_faces="false" font=""></fb:like></div>';
 fusiontabledata += '<div><div><table border="0" width="100%" cellspacing="3" style="float: left;">';
 fusiontabledata += '<tr><td align="left" valign="top" colspan="2"><div id="leftbody"></div>';
 fusiontabledata += '</td></tr><tr><td width="210" align="left" valign="top"><table border="0" width="100%" cellspacing="3" cellpadding="3"><tr><td style="border-style: solid; border-width: 0px" bordercolor="#f7f7f7">';
@@ -1038,7 +1038,8 @@ String.prototype.br2nl = function() {
 <body onload="getData();" style="background-color: #f7f7f7;" >
 <div id="wrap"  style="background-color: #ffffff;" >
 <div id="fb-root"></div>
-<a name="topList"><div style="background-position: left top; position:relative; background-image:url('images/002.png'); background-repeat:no-repeat"><img border="0" src="images/anime-anonymous-banner-2.png" width="900" height="200"></div></a>
+<a name="topList"><br/></a>
+<div style="background-position: left top; position:relative; background-image:url('images/002.png'); background-repeat:no-repeat"><img border="0" src="images/anime-anonymous-banner-2.png" width="900" height="200"></div>
 <div id="ftdata" style="background-color: #ffffff;">Loading Anime List...<img border="0" height="21" src="http://1.bp.blogspot.com/-_jr8U-tayi0/Tm-PG9zwqAI/AAAAAAAAATM/xkxNHb_R7Gs/s400/indicator-u.gif" width="21" /></div>
 </div>
 </body>
