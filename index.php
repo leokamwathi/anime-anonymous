@@ -364,6 +364,8 @@ FB.ui(
 );
 }
 function getData() {
+ window.location.hash="topLink";
+ window.scroll(0,0);
 if(getParameterByName("id")){
  //window.location.href = "?id="+getParameterByName("id");
 	var whereClause = "";
@@ -475,7 +477,7 @@ if (findchar=="TOP"){
   }
   fbinit();
   window.location.hash="topLink";
-  scroll(0,0);
+  window.scroll(0,0);
 }
 
 function getParameterByName(name)
@@ -1026,6 +1028,8 @@ String.prototype.br2nl = function() {
 	}
 	return this.replace( /\<br(\s*\/|)\>/g, nl );
 }
+ window.location.hash="topLink";
+ window.scroll(0,0);
 </script>
 <style>
 #wrap { 
@@ -1041,7 +1045,7 @@ String.prototype.br2nl = function() {
 <div id="wrap"  style="background-color: #ffffff;" >
 <div id="fb-root"></div>
 <div style="background-position: left top; position:relative; background-image:url('images/002.png'); background-repeat:no-repeat"><img border="0" src="images/anime-anonymous-banner-2.png" width="900" height="200"></div>
-<a name="topLink">...</a>
+<a name="topLink"><div/></a>
 <div id="ftdata" style="background-color: #ffffff;">Loading Anime List...<img border="0" height="21" src="http://1.bp.blogspot.com/-_jr8U-tayi0/Tm-PG9zwqAI/AAAAAAAAATM/xkxNHb_R7Gs/s400/indicator-u.gif" width="21" /></div>
 </div>
 </body>
