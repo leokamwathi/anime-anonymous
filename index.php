@@ -373,11 +373,13 @@ if(getParameterByName("id")){
 }else if(getParameterByName("q")){
 	var findstr = getParameterByName("q");
 	var qArray = findstr.split("/");
-	if(qArray.lenth>0){
+	if(qArray.length>0){
 		findstr = qArray[1];
 	}
 	//findstr = myReplace(findstr,"/"," ");
+	findstr = myReplace(findstr,"-"," ");
 	findstr = myReplace(findstr,"_"," ");
+	findstr = myReplace(findstr,"  "," ");
 	//var slash = findstr.indexOf("/");
 	//findstr = findstr.substr();
 	//var whereClause = "Where title like '"+findstr+"' ORDER BY title ASC LIMIT 100";
@@ -385,7 +387,7 @@ if(getParameterByName("id")){
 	var whereClause = "Where title CONTAINS '"+findstr+"' ORDER BY title ASC LIMIT 100";
 	var queryText = encodeURIComponent("SELECT 'title', 'anime_type', 'episodes', 'synopsis', 'mal_score', 'mal_image','mal_id','start_date','end_date','synonyms' FROM 1409399 " + whereClause);
 	var query = new google.visualization.Query('http://www.google.com/fusiontables/gvizdata?tq='  + queryText);
-	query.send(getAnime);
+	query.send(getSearch);
 }else{
 
 if(getParameterByName("ani")){
@@ -613,6 +615,138 @@ stx = synopsis ;
   //document.getElementsByTagName('h3')[0].innerHTML = "";
 }
 
+
+function getSearch(response) {
+  numRows = response.getDataTable().getNumberOfRows();
+  numCols = response.getDataTable().getNumberOfColumns();
+  var fusiontabledata = "";
+  var evenx = false;
+  
+  //for(i = 0; i < numCols; i++) {
+  //fusiontabledata += response.getDataTable().getColumnLabel(i) + ",";
+  //}
+
+  var topList = ""
+
+topList  += '<div id="horiznav_nav" style="margin: 5px 0 10px 0;">';
+topList  += '<ul style="margin-right: 0; padding-right: 0;">';
+topList  += '<li><a href="?ani=top" class="horiznav_active">TOP</a></li>';
+topList  += '<li><a href="?ani=0-9">0-9</a></li>';
+topList  += '<li><a href="?ani=A">A</a></li>';
+topList  += '<li><a href="?ani=B">B</a></li>';
+topList  += '<li><a href="?ani=C">C</a></li>';
+topList  += '<li><a href="?ani=D">D</a></li>';
+topList  += '<li><a href="?ani=E">E</a></li>';
+topList  += '<li><a href="?ani=F">F</a></li>';
+topList  += '<li><a href="?ani=G">G</a></li>';
+topList  += '<li><a href="?ani=H">H</a></li>';
+topList  += '<li><a href="?ani=I">I</a></li>';
+topList  += '<li><a href="?ani=J">J</a></li>';
+topList  += '<li><a href="?ani=K">K</a></li>';
+topList  += '<li><a href="?ani=L">L</a></li>';
+topList  += '<li><a href="?ani=M">M</a></li>';
+topList  += '<li><a href="?ani=N">N</a></li>';
+topList  += '<li><a href="?ani=O">O</a></li>';
+topList  += '<li><a href="?ani=P">P</a></li>';
+topList  += '<li><a href="?ani=Q">Q</a></li>';
+topList  += '<li><a href="?ani=R">R</a></li>';
+topList  += '<li><a href="?ani=S">S</a></li>';
+topList  += '<li><a href="?ani=T">T</a></li>';
+topList  += '<li><a href="?ani=U">U</a></li>';
+topList  += '<li><a href="?ani=V">V</a></li>';
+topList  += '<li><a href="?ani=W">W</a></li>';
+topList  += '<li><a href="?ani=X">X</a></li>';
+topList  += '<li><a href="?ani=Y">Y</a></li>';
+topList  += '<li><a href="?ani=Z">Z</a></li>';
+topList  += '</ul>';
+topList  += '</div>';
+
+
+  fusiontabledata += topList  + '<h2 style="font-size: 24px;">'+mytitle+'</h2>';
+  fusiontabledata += '<table><tr valign="top"><td align="left" valign="top"><table border="0" cellpadding="5" cellspacing="0">';
+  fusiontabledata += '<tr valign="top">';
+  for(i = 0; i < numRows; i++) {
+    //for(j = 0; j < numCols-1; j++) {
+ var q = i+1;
+ var pq = 30;
+ title = response.getDataTable().getValue(i, 0);
+ anime_type = response.getDataTable().getValue(i, 1);
+ episodes = response.getDataTable().getValue(i, 2);
+ synopsis = response.getDataTable().getValue(i, 3);
+ titleURL = encodeURIComponent(title);
+ var stx = synopsis;
+ synopsis = synopsis.nl2br('<br/>');
+while(synopsis==stx){
+
+synopsis = synopsis.replace("&lt;","<"); 
+synopsis = synopsis.replace("&gt;",">");
+synopsis = synopsis.replace("&amp;","&");
+synopsis = synopsis.replace("\n","<br/>");
+synopsis = synopsis.replace("\r","<br/>");
+//synopsis = synopsis.replace("\g","<br/>");
+synopsis = synopsis.replace(/\n/,"<br/>");
+synopsis = synopsis.replace(/\r/,"<br/>");
+//synopsis = synopsis.replace(/\g/,"<br/>");
+synopsis = synopsis.replace("&quot;",'"');
+synopsis = synopsis.replace('http://myanimelist.net/anime/',''); //http://anime-anonymous.herokuapp.com/%22http://myanimelist.net/anime/263/Hajime_no_Ippo%22
+synopsis = synopsis.replace('href="','href  =  "http://apps.facebook.com/anime-anonymous/?q=');
+synopsis = synopsis.replace('href ="','href  =  "http://apps.facebook.com/anime-anonymous/?q=');
+synopsis = synopsis.replace('href = "','href  =  "http://apps.facebook.com/anime-anonymous/?q=');
+synopsis = synopsis.replace('href= "','href  =  "http://apps.facebook.com/anime-anonymous/?q=');
+//synopsis = synopsis.replace("\n","<br/>");
+synopsis = synopsis.replace( /\r\n|\r|\n/g, "<br/>");
+
+
+if(synopsis ==stx){
+stx = "macmendex";
+}else{
+stx = synopsis ;
+}
+}
+
+ synopsis = synopsis.substr(0,150);
+
+ mal_score = response.getDataTable().getValue(i, 4);
+ imgstr = response.getDataTable().getValue(i, 5);
+ imgstr = imgstr.substr(0,(imgstr.length-4));
+ 
+ var crc_code = response.getDataTable().getValue(i, 6);
+ if(counter){
+ fusiontabledata += '<td class="borderClass" style="border-width: 0 0 1px 0;" align="center" valign="top" width="'+pq+'">';
+ fusiontabledata += '<span style="font-weight: bold; font-size: 24px;" class="lightLink">'+q+'</span></td>';
+ }
+ fusiontabledata += '<td class="borderClass" align="center" valign="top" width="50px">';
+ fusiontabledata += '<div class="picSurround">';
+ fusiontabledata += '<a href="?id='+crc_code+'&name='+titleURL+'" class="hoverinfo_trigger" id="#area5114" rel="#info5114">';
+ fusiontabledata += '<img src="'+imgstr+'t.jpg" border="0">';
+ //fusiontabledata += '<img src="'+imgstr+'.jpg" width="50%" height="50%" border="0">';
+ fusiontabledata += '</a>';
+ fusiontabledata += '</div>';
+ fusiontabledata += '</td>';
+ fusiontabledata += '<td class="borderClass" align="left" valign="top">';
+ fusiontabledata += '<div id="area5114"> <div id="info5114" rel="a5114" class="hoverinfo"> </div> </div>';
+ fusiontabledata += '<a href="?id='+crc_code+'&name='+titleURL +'" class="hoverinfo_trigger" id="#area5114" rel="#info5114">';
+ fusiontabledata += '<strong>'+title+'</strong> </a> <div class="spaceit_pad"> ' + synopsis ;
+ fusiontabledata += '<a href="?id='+ crc_code + '&name='+titleURL +'">';
+ fusiontabledata += '<i>... read more</i></a><br><span class="lightLink">';
+ fusiontabledata += anime_type + ',' + episodes + ' eps , scored ' + mal_score;
+ fusiontabledata += '</span> </div> </td>';
+ if(evenx){
+     fusiontabledata += '</tr><tr valign="top">';
+  evenx = false;
+ }else{
+  evenx = true;
+ }
+  }
+
+  fusiontabledata += '</table></td><td align="left" valign="top"><table border="0" cellpadding="5" cellspacing="0">';
+   fusiontabledata += "</table></td></tr></table><br/>";
+   
+  document.getElementById('ftdata').innerHTML = fusiontabledata+mytitle;
+ fbinit(); 
+  //var mytitle = '<h2><div style="float: right;"></div>TOP 100 Anime</h2>';
+  //document.getElementsByTagName('h3')[0].innerHTML = "";
+}
 
 function getAnime(response) {
 
@@ -850,12 +984,12 @@ FB.ui({method: 'apprequests', display: 'iframe', message: myMessage.substr(0,254
 function myReplace(str,fstr,rstr){
 	var strx = str;
 	try{
-		while(str==stx){
+		while(str==strx){
 			str = str.replace(fstr,rstr); 
-			if(str ==stx){
-				stx = "macmendex";
+			if(str ==strx){
+				strx = "macmendex";
 			}else{
-				stx = str;
+				strx = str;
 			}
 		}
 		return str;
