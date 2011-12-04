@@ -474,6 +474,7 @@ if (findchar=="TOP"){
   query.send(getRows);
   }
   fbinit();
+  window.location.hash="topLink";
 }
 
 function getParameterByName(name)
