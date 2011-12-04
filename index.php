@@ -589,7 +589,7 @@ stx = synopsis ;
  }
  fusiontabledata += '<td class="borderClass" align="center" valign="top" width="50px">';
  fusiontabledata += '<div class="picSurround">';
- fusiontabledata += '<a href="?id='+crc_code+'&name='+titleURL+'#topList" class="hoverinfo_trigger" id="#area5114" rel="#info5114">';
+ fusiontabledata += '<a href="?id='+crc_code+'&name='+titleURL+'#topLink" class="hoverinfo_trigger" id="#area5114" rel="#info5114">';
  fusiontabledata += '<img src="'+imgstr+'t.jpg" border="0">';
  //fusiontabledata += '<img src="'+imgstr+'.jpg" width="50%" height="50%" border="0">';
  fusiontabledata += '</a>';
@@ -597,9 +597,9 @@ stx = synopsis ;
  fusiontabledata += '</td>';
  fusiontabledata += '<td class="borderClass" align="left" valign="top">';
  fusiontabledata += '<div id="area5114"> <div id="info5114" rel="a5114" class="hoverinfo"> </div> </div>';
- fusiontabledata += '<a href="?id='+crc_code+'&name='+titleURL +'#topList" class="hoverinfo_trigger" id="#area5114" rel="#info5114">';
+ fusiontabledata += '<a href="?id='+crc_code+'&name='+titleURL +'#topLink" class="hoverinfo_trigger" id="#area5114" rel="#info5114">';
  fusiontabledata += '<strong>'+title+'</strong> </a> <div class="spaceit_pad"> ' + synopsis ;
- fusiontabledata += '<a href="?id='+ crc_code + '&name='+titleURL +'#topList">';
+ fusiontabledata += '<a href="?id='+ crc_code + '&name='+titleURL +'#topLink">';
  fusiontabledata += '<i>... read more</i></a><br><span class="lightLink">';
  fusiontabledata += anime_type + ',' + episodes + ' eps , scored ' + mal_score;
  fusiontabledata += '</span> </div> </td>';
@@ -722,7 +722,7 @@ stx = synopsis ;
  }
  fusiontabledata += '<td class="borderClass" align="center" valign="top" width="50px">';
  fusiontabledata += '<div class="picSurround">';
- fusiontabledata += '<a href="?id='+crc_code+'&name='+titleURL+'#topList" class="hoverinfo_trigger" id="#area5114" rel="#info5114">';
+ fusiontabledata += '<a href="?id='+crc_code+'&name='+titleURL+'#topLink" class="hoverinfo_trigger" id="#area5114" rel="#info5114">';
  fusiontabledata += '<img src="'+imgstr+'t.jpg" border="0">';
  //fusiontabledata += '<img src="'+imgstr+'.jpg" width="50%" height="50%" border="0">';
  fusiontabledata += '</a>';
@@ -730,9 +730,9 @@ stx = synopsis ;
  fusiontabledata += '</td>';
  fusiontabledata += '<td class="borderClass" align="left" valign="top">';
  fusiontabledata += '<div id="area5114"> <div id="info5114" rel="a5114" class="hoverinfo"> </div> </div>';
- fusiontabledata += '<a href="?id='+crc_code+'&name='+titleURL +'#topList" class="hoverinfo_trigger" id="#area5114" rel="#info5114">';
+ fusiontabledata += '<a href="?id='+crc_code+'&name='+titleURL +'#topLink" class="hoverinfo_trigger" id="#area5114" rel="#info5114">';
  fusiontabledata += '<strong>'+title+'</strong> </a> <div class="spaceit_pad"> ' + synopsis ;
- fusiontabledata += '<a href="?id='+ crc_code + '&name='+titleURL +'#topList">';
+ fusiontabledata += '<a href="?id='+ crc_code + '&name='+titleURL +'#topLink">';
  fusiontabledata += '<i>... read more</i></a><br><span class="lightLink">';
  fusiontabledata += anime_type + ',' + episodes + ' eps , scored ' + mal_score;
  fusiontabledata += '</span> </div> </td>';
@@ -1038,7 +1038,7 @@ String.prototype.br2nl = function() {
 <body onload="getData();" style="background-color: #f7f7f7;" >
 <div id="wrap"  style="background-color: #ffffff;" >
 <div id="fb-root"></div>
-<a name="topList"><div/></a>
+<a name="topLink"><div><hr/></div></a>
 <div style="background-position: left top; position:relative; background-image:url('images/002.png'); background-repeat:no-repeat"><img border="0" src="images/anime-anonymous-banner-2.png" width="900" height="200"></div>
 <div id="ftdata" style="background-color: #ffffff;">Loading Anime List...<img border="0" height="21" src="http://1.bp.blogspot.com/-_jr8U-tayi0/Tm-PG9zwqAI/AAAAAAAAATM/xkxNHb_R7Gs/s400/indicator-u.gif" width="21" /></div>
 </div>
