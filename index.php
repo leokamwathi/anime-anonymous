@@ -380,7 +380,9 @@ if(getParameterByName("id")){
 	findstr = myReplace(findstr,"_"," ");
 	//var slash = findstr.indexOf("/");
 	//findstr = findstr.substr();
-	var whereClause = "Where title like '"+findstr+"' ORDER BY title ASC LIMIT 100";
+	//var whereClause = "Where title like '"+findstr+"' ORDER BY title ASC LIMIT 100";
+	alert(findstr);
+	var whereClause = "Where title CONTAINS '"+findstr+"' ORDER BY title ASC LIMIT 100";
 	var queryText = encodeURIComponent("SELECT 'title', 'anime_type', 'episodes', 'synopsis', 'mal_score', 'mal_image','mal_id','start_date','end_date','synonyms' FROM 1409399 " + whereClause);
 	var query = new google.visualization.Query('http://www.google.com/fusiontables/gvizdata?tq='  + queryText);
 	query.send(getAnime);
