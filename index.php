@@ -302,6 +302,7 @@ var mal_id;
 var sdate;
 var edate;
 var synonyms;
+var findstr;
 function fbinit(){
   window.fbAsyncInit = function() {
 	FB.Canvas.setAutoResize();
@@ -371,7 +372,7 @@ if(getParameterByName("id")){
 	var query = new google.visualization.Query('http://www.google.com/fusiontables/gvizdata?tq='  + queryText);
 	query.send(getAnime);
 }else if(getParameterByName("q")){
-	var findstr = getParameterByName("q");
+	findstr = getParameterByName("q");
 	var qArray = findstr.split("/");
 	if(qArray.length>0){
 		findstr = qArray[1];
@@ -621,12 +622,12 @@ function getSearch(response) {
   numCols = response.getDataTable().getNumberOfColumns();
   var fusiontabledata = "";
   var evenx = false;
-  
+  mytitle = "Searching for '"+findstr+"' ("+numRows+" records found)";
   //for(i = 0; i < numCols; i++) {
   //fusiontabledata += response.getDataTable().getColumnLabel(i) + ",";
   //}
 
-  var topList = ""
+var topList = ""
 
 topList  += '<div id="horiznav_nav" style="margin: 5px 0 10px 0;">';
 topList  += '<ul style="margin-right: 0; padding-right: 0;">';
