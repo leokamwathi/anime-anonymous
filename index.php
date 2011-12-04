@@ -475,6 +475,7 @@ if (findchar=="TOP"){
   }
   fbinit();
   window.location.hash="topLink";
+  scroll(0,0);
 }
 
 function getParameterByName(name)
