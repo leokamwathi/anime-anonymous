@@ -374,13 +374,13 @@ if(getParameterByName("id")){
 }else if(getParameterByName("q")){
 	findstr = getParameterByName("q");
 	var qArray = findstr.split("/");
-	if(qArray.length>0){
+	if(qArray.length>1){
 		findstr = qArray[1];
 	}
 	//findstr = myReplace(findstr,"/"," ");
-	findstr = myReplace(findstr,"-"," ");
+	//findstr = myReplace(findstr,"-"," ");
 	findstr = myReplace(findstr,"_"," ");
-	findstr = myReplace(findstr,"  "," ");
+	//findstr = myReplace(findstr,"  "," ");
 	//var slash = findstr.indexOf("/");
 	//findstr = findstr.substr();
 	//var whereClause = "Where title like '"+findstr+"' ORDER BY title ASC LIMIT 100";
@@ -388,7 +388,11 @@ if(getParameterByName("id")){
 	var whereClause = "Where title CONTAINS '"+findstr+"' ORDER BY title ASC LIMIT 100";
 	var queryText = encodeURIComponent("SELECT 'title', 'anime_type', 'episodes', 'synopsis', 'mal_score', 'mal_image','mal_id','start_date','end_date','synonyms' FROM 1409399 " + whereClause);
 	var query = new google.visualization.Query('http://www.google.com/fusiontables/gvizdata?tq='  + queryText);
-	query.send(getSearch);
+	if(qArray.length>1){
+		query.send(getAnime);
+	}else{
+		query.send(getSearch);
+	}
 }else{
 
 if(getParameterByName("ani")){
@@ -557,10 +561,10 @@ synopsis = synopsis.replace(/\r/,"<br/>");
 //synopsis = synopsis.replace(/\g/,"<br/>");
 synopsis = synopsis.replace("&quot;",'"');
 synopsis = synopsis.replace('http://myanimelist.net/anime/',''); //http://anime-anonymous.herokuapp.com/%22http://myanimelist.net/anime/263/Hajime_no_Ippo%22
-synopsis = synopsis.replace('href="','href  =  "http://apps.facebook.com/anime-anonymous/?q=');
-synopsis = synopsis.replace('href ="','href  =  "http://apps.facebook.com/anime-anonymous/?q=');
-synopsis = synopsis.replace('href = "','href  =  "http://apps.facebook.com/anime-anonymous/?q=');
-synopsis = synopsis.replace('href= "','href  =  "http://apps.facebook.com/anime-anonymous/?q=');
+synopsis = synopsis.replace('href="','href  =  "/?q=');
+synopsis = synopsis.replace('href ="','href  =  "/?q=');
+synopsis = synopsis.replace('href = "','href  =  "/?q=');
+synopsis = synopsis.replace('href= "','href  =  "/?q=');
 //synopsis = synopsis.replace("\n","<br/>");
 synopsis = synopsis.replace( /\r\n|\r|\n/g, "<br/>");
 
@@ -690,10 +694,10 @@ synopsis = synopsis.replace(/\r/,"<br/>");
 //synopsis = synopsis.replace(/\g/,"<br/>");
 synopsis = synopsis.replace("&quot;",'"');
 synopsis = synopsis.replace('http://myanimelist.net/anime/',''); //http://anime-anonymous.herokuapp.com/%22http://myanimelist.net/anime/263/Hajime_no_Ippo%22
-synopsis = synopsis.replace('href="','href  =  "http://apps.facebook.com/anime-anonymous/?q=');
-synopsis = synopsis.replace('href ="','href  =  "http://apps.facebook.com/anime-anonymous/?q=');
-synopsis = synopsis.replace('href = "','href  =  "http://apps.facebook.com/anime-anonymous/?q=');
-synopsis = synopsis.replace('href= "','href  =  "http://apps.facebook.com/anime-anonymous/?q=');
+synopsis = synopsis.replace('href="','href  =  "/?q=');
+synopsis = synopsis.replace('href ="','href  =  "/?q=');
+synopsis = synopsis.replace('href = "','href  =  "/?q=');
+synopsis = synopsis.replace('href= "','href  =  "/?q=');
 //synopsis = synopsis.replace("\n","<br/>");
 synopsis = synopsis.replace( /\r\n|\r|\n/g, "<br/>");
 
