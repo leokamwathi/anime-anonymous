@@ -288,6 +288,8 @@ echo('<meta property="og:title" content="Anime Anonymous"/>
 <link rel="stylesheet" href="stylesheets/animeanonymousstyle.v1.0.css" type="text/css" />
 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
 <script type="text/javascript" id="fbscript">
+ window.location.hash="topLink";
+ window.scroll(0,0);
 var myUID;
 var myName;
 var myImg;
