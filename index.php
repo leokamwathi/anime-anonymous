@@ -595,7 +595,7 @@ stx = synopsis ;
  }
  fusiontabledata += '<td class="borderClass" align="center" valign="top" width="50px">';
  fusiontabledata += '<div class="picSurround">';
- fusiontabledata += '<a href="?id='+crc_code+'&name='+titleURL+'#topLink" class="hoverinfo_trigger" id="#area5114" rel="#info5114">';
+ fusiontabledata += '<a href="?id='+crc_code+'&name='+titleURL+'#topLink" class="hoverinfo_trigger" id="#area5114" rel="#info5114" target="_self">';
  fusiontabledata += '<img src="'+imgstr+'t.jpg" border="0">';
  //fusiontabledata += '<img src="'+imgstr+'.jpg" width="50%" height="50%" border="0">';
  fusiontabledata += '</a>';
@@ -603,9 +603,9 @@ stx = synopsis ;
  fusiontabledata += '</td>';
  fusiontabledata += '<td class="borderClass" align="left" valign="top">';
  fusiontabledata += '<div id="area5114"> <div id="info5114" rel="a5114" class="hoverinfo"> </div> </div>';
- fusiontabledata += '<a href="?id='+crc_code+'&name='+titleURL +'#topLink" class="hoverinfo_trigger" id="#area5114" rel="#info5114">';
+ fusiontabledata += '<a href="?id='+crc_code+'&name='+titleURL +'#topLink" class="hoverinfo_trigger" id="#area5114" rel="#info5114" target="_self">';
  fusiontabledata += '<strong>'+title+'</strong> </a> <div class="spaceit_pad"> ' + synopsis ;
- fusiontabledata += '<a href="?id='+ crc_code + '&name='+titleURL +'#topLink">';
+ fusiontabledata += '<a href="?id='+ crc_code + '&name='+titleURL +'#topLink" target="_self">';
  fusiontabledata += '<i>... read more</i></a><br><span class="lightLink">';
  fusiontabledata += anime_type + ',' + episodes + ' eps , scored ' + mal_score;
  fusiontabledata += '</span> </div> </td>';
@@ -728,7 +728,7 @@ stx = synopsis ;
  }
  fusiontabledata += '<td class="borderClass" align="center" valign="top" width="50px">';
  fusiontabledata += '<div class="picSurround">';
- fusiontabledata += '<a href="?id='+crc_code+'&name='+titleURL+'#topLink" class="hoverinfo_trigger" id="#area5114" rel="#info5114">';
+ fusiontabledata += '<a href="?id='+crc_code+'&name='+titleURL+'#topLink" class="hoverinfo_trigger" id="#area5114" rel="#info5114" target="_self">';
  fusiontabledata += '<img src="'+imgstr+'t.jpg" border="0">';
  //fusiontabledata += '<img src="'+imgstr+'.jpg" width="50%" height="50%" border="0">';
  fusiontabledata += '</a>';
@@ -736,9 +736,9 @@ stx = synopsis ;
  fusiontabledata += '</td>';
  fusiontabledata += '<td class="borderClass" align="left" valign="top">';
  fusiontabledata += '<div id="area5114"> <div id="info5114" rel="a5114" class="hoverinfo"> </div> </div>';
- fusiontabledata += '<a href="?id='+crc_code+'&name='+titleURL +'#topLink" class="hoverinfo_trigger" id="#area5114" rel="#info5114">';
+ fusiontabledata += '<a href="?id='+crc_code+'&name='+titleURL +'#topLink" class="hoverinfo_trigger" id="#area5114" rel="#info5114" target="_self">';
  fusiontabledata += '<strong>'+title+'</strong> </a> <div class="spaceit_pad"> ' + synopsis ;
- fusiontabledata += '<a href="?id='+ crc_code + '&name='+titleURL +'#topLink">';
+ fusiontabledata += '<a href="?id='+ crc_code + '&name='+titleURL +'#topLink" target="_self">';
  fusiontabledata += '<i>... read more</i></a><br><span class="lightLink">';
  fusiontabledata += anime_type + ',' + episodes + ' eps , scored ' + mal_score;
  fusiontabledata += '</span> </div> </td>';
@@ -1048,8 +1048,14 @@ String.prototype.br2nl = function() {
 <div id="fb-root"></div>
 <div id="wrap"  style="background-color: #ffffff;" >
 <?php
-$bannerImage = "images/002.png";
-echo('<div style="background-position: left top; position:relative; background-image:url('."'".$bannerImage."'".'); background-repeat:no-repeat"><img border="0" src="images/anime-anonymous-banner-2.png" width="900" height="200"/></div>');
+$myRnd = rand(0, 15);
+if($myRnd>9){
+$imgNo = "0".$myRnd;
+}else{
+$imgNo = "00".$myRnd;
+}
+$bannerImage = "images/".$myRnd.".png";
+echo('<div style="background-position: left top; position:relative; background-image:url('."'".$bannerImage."'".'); background-repeat:no-repeat"><img border="0" src="images/anime-anonymous-banner-3.png" width="900" height="200"/></div>');
 ?>
 <div id="ftdata" style="background-color: #ffffff;">Loading Anime List...<img border="0" height="21" src="http://1.bp.blogspot.com/-_jr8U-tayi0/Tm-PG9zwqAI/AAAAAAAAATM/xkxNHb_R7Gs/s400/indicator-u.gif" width="21" /></div>
 </div>
