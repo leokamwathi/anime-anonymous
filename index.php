@@ -1054,7 +1054,7 @@ $imgNo = "0".$myRnd;
 }else{
 $imgNo = "00".$myRnd;
 }
-$bannerImage = "images/".$myRnd.".png";
+$bannerImage = "images/".$imgNo.".png";
 echo('<div style="background-position: left top; position:relative; background-image:url('."'".$bannerImage."'".'); background-repeat:no-repeat"><img border="0" src="images/anime-anonymous-banner-3.png" width="900" height="200"/></div>');
 ?>
 <div id="ftdata" style="background-color: #ffffff;">Loading Anime List...<img border="0" height="21" src="http://1.bp.blogspot.com/-_jr8U-tayi0/Tm-PG9zwqAI/AAAAAAAAATM/xkxNHb_R7Gs/s400/indicator-u.gif" width="21" /></div>
