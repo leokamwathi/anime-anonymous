@@ -287,7 +287,7 @@ echo('<meta property="og:title" content="Anime Anonymous"/>
 	?>
 <link rel="stylesheet" href="stylesheets/animeanonymousstyle.v1.0.css" type="text/css" />
 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
-<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>
+
 <script type="text/javascript" id="fbscript">
  window.location.hash="topLink";
  window.scroll(0,0);
@@ -1060,5 +1060,6 @@ echo('<div style="background-position: left top; position:relative; background-i
 ?>
 <div id="ftdata" style="background-color: #ffffff;">Loading Anime List...<img border="0" height="21" src="http://1.bp.blogspot.com/-_jr8U-tayi0/Tm-PG9zwqAI/AAAAAAAAATM/xkxNHb_R7Gs/s400/indicator-u.gif" width="21" /></div>
 </div>
+<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>
 </body>
 </html>
