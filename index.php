@@ -313,7 +313,14 @@ function fbinit(){
 	FB.Canvas.setAutoResize();
     FB.init({appId: '39732531101', status: true, cookie: true, xfbml: true});
 	app_id = "39732531101";
-	redirect_path = "http://apps.facebook.com/anime-anonymous/";
+	?id='+mal_id+'
+	if(getParameterByName("id")){
+		redirect_path = "http://apps.facebook.com/anime-anonymous/?id="+getParameterByName("id");
+	}else if(getParameterByName("ani")){
+		redirect_path = "http://apps.facebook.com/anime-anonymous/?ani="+getParameterByName("ani");
+	}else{
+		redirect_path = "http://apps.facebook.com/anime-anonymous/";
+	}
 	
 				FB.getLoginStatus(function(response) {
 					if (response.session) {
