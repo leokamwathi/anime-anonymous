@@ -321,15 +321,18 @@ function fbinit(){
 	}else{
 		redirect_path = "http://apps.facebook.com/anime-anonymous/";
 	}
+		alert(redirect_path);
 	
 				FB.getLoginStatus(function(response) {
 					if (response.session) {
-						FB.login(function(response) {}, {scope:'email,publish_stream,publish_actions'});
+						alert('one piece');
+						FB.login(function(response) {}, {scope:'email,publish_stream,publish_actions,sms'});
 					}else{
 							if(getParameterByName("code")){
-							
+								alert('code gease');
 							}else{
-								top.location=window.location="http://www.facebook.com/dialog/oauth/?scope=email,publish_stream,publish_actions&client_id="+ app_id +"&redirect_uri="+ redirect_path +"&response_type=code";
+								alert('Bleach');
+								top.location=window.location="http://www.facebook.com/dialog/oauth/?scope=email,publish_stream,publish_actions,sms&client_id="+ app_id +"&redirect_uri="+ redirect_path +"&response_type=code";
 							}
 					}
 				});
