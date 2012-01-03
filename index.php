@@ -308,18 +308,22 @@ var synonyms;
 var findstr;
 var app_id;
 var redirect_path;
+var base_path;
+var app_path;
 function fbinit(){
   window.fbAsyncInit = function() {
 	FB.Canvas.setAutoResize();
     FB.init({appId: '39732531101', status: true, cookie: true, xfbml: true});
 	app_id = "39732531101";
+	base_path = "http://anime-anonymous.herokuapp.com/";
+	app_path = "http://apps.facebook.com/anime-anonymous/";
 	?id='+mal_id+'
 	if(getParameterByName("id")){
-		redirect_path = "http://apps.facebook.com/anime-anonymous/?id="+getParameterByName("id");
+		redirect_path = base_path+"?id="+getParameterByName("id");
 	}else if(getParameterByName("ani")){
-		redirect_path = "http://apps.facebook.com/anime-anonymous/?ani="+getParameterByName("ani");
+		redirect_path = base_path+"?ani="+getParameterByName("ani");
 	}else{
-		redirect_path = "http://apps.facebook.com/anime-anonymous/";
+		redirect_path = base_path;
 	}
 		alert(redirect_path);
 	
