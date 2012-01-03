@@ -306,14 +306,30 @@ var sdate;
 var edate;
 var synonyms;
 var findstr;
+var app_id;
+var redirect_path;
 function fbinit(){
   window.fbAsyncInit = function() {
 	FB.Canvas.setAutoResize();
     FB.init({appId: '39732531101', status: true, cookie: true, xfbml: true});
-	FB.Event.subscribe('edge.create', function(response) {
-		becomeFan();
-	});
-					FB.api('/me', function(response) {
+	app_id = "39732531101";
+	redirect_path = "http://apps.facebook.com/anime-anonymous/";
+	
+				FB.getLoginStatus(function(response) {
+					if (response.session) {
+						FB.login(function(response) {}, {scope:'email,publish_stream,publish_actions'});
+					}else{
+							if(getParameterByName("code")){
+							
+							}else{
+								top.location=window.location="http://www.facebook.com/dialog/oauth/?scope=email,publish_stream,publish_actions&client_id="+ app_id +"&redirect_uri="+ redirect_path +"&response_type=code";
+							}
+					}
+				});
+				FB.Event.subscribe('edge.create', function(response) {
+					becomeFan();
+				});
+				FB.api('/me', function(response) {
 				//if(getParameterByName("debug")){
 				console.log(response);
 				myUID = response.id;
@@ -874,8 +890,9 @@ topList  += '</ul>';
 topList  += '</div>';
 	
 var fusiontabledata = "";
+var fbSharePath = 'http://www.facebook.com/sharer.php?u=http://apps.facebook.com/anime-anonymous/?id='+mal_id+'&t='+title+'&mref=fb';
 //<a name="fb_share" type="button" share_url="http://apps.facebook.com/anime-anonymous/?id='+mal_id+'"></a>
-var fbsharelink = '<a name="fb_share" type="button" share_url="http://apps.facebook.com/anime-anonymous/?id='+mal_id+'" onClick="window.open("http://www.facebook.com/sharer.php?u=http://apps.facebook.com/anime-anonymous/?id='+mal_id+'&t='+title+'");">share</a>';
+var fbsharelink = '<a name="fb_share" type="button" share_url="http://apps.facebook.com/anime-anonymous/?id='+mal_id+'" onClick="window.open('+fbSharePath+');">share</a>';
 
 //
 fusiontabledata += topList+fbsharelink+'<br/><div class="animeTitle" >'+title+'</div><div><br/></div><div style="float: left;"><fb:share-button href="http://apps.facebook.com/anime-anonymous/?id='+mal_id+'" type="button"></fb:share-button><fb:like href="http://apps.facebook.com/anime-anonymous/?id='+mal_id+'" send="true" width="400" show_faces="false" font=""></fb:like></div>';
