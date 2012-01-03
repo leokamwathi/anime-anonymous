@@ -875,8 +875,10 @@ topList  += '</div>';
 	
 var fusiontabledata = "";
 //<a name="fb_share" type="button" share_url="http://apps.facebook.com/anime-anonymous/?id='+mal_id+'"></a>
+var fbsharelink = '<a name="fb_share" type="button" share_url="http://apps.facebook.com/anime-anonymous/?id='+mal_id+'" onClick="window.open("http://www.facebook.com/sharer.php?u=http://apps.facebook.com/anime-anonymous/?id='+mal_id+'&t='+title+'");">share</a>';
 
-fusiontabledata += topList+'<br/><div class="animeTitle" >'+title+'</div><div><br/></div><div style="float: left;"><fb:like href="http://apps.facebook.com/anime-anonymous/?id='+mal_id+'" send="true" width="800" show_faces="false" font=""></fb:like><fb:share-button href="http://apps.facebook.com/anime-anonymous/?id='+mal_id+'" type="button"></fb:share-button></div>';
+//
+fusiontabledata += topList+fbsharelink+'<br/><div class="animeTitle" >'+title+'</div><div><br/></div><div style="float: left;"><fb:share-button href="http://apps.facebook.com/anime-anonymous/?id='+mal_id+'" type="button"></fb:share-button><fb:like href="http://apps.facebook.com/anime-anonymous/?id='+mal_id+'" send="true" width="400" show_faces="false" font=""></fb:like></div>';
 fusiontabledata += '<div><div><table border="0" width="100%" cellspacing="3" style="float: left;">';
 fusiontabledata += '<tr><td align="left" valign="top" colspan="2"><div id="leftbody"></div>';
 fusiontabledata += '</td></tr><tr><td width="210" align="left" valign="top"><table border="0" width="100%" cellspacing="3" cellpadding="3"><tr><td style="border-style: solid; border-width: 0px" bordercolor="#f7f7f7">';
