@@ -379,6 +379,10 @@ function fbinit(){
     var e = document.createElement('script'); e.async = true;
     e.src = document.location.protocol +'//connect.facebook.net/en_US/all.js';
     document.getElementById('fb-root').appendChild(e);
+	
+	var ee = document.createElement('script'); ee.async = true;
+    ee.src = document.location.protocol +'//static.ak.fbcdn.net/connect.php/js/FB.Share';
+    document.getElementById('fb-share-root').appendChild(ee);
   }());
 }
 </script>
@@ -1093,6 +1097,7 @@ String.prototype.br2nl = function() {
 <body onload="getData();" style="background-color: #f7f7f7;" >
 <a name="topLink"><div/></a>
 <div id="fb-root"></div>
+<div id="fb-share-root"></div>
 <div id="wrap"  style="background-color: #ffffff;" >
 <?php
 $myRnd = rand(0, 15);
@@ -1105,9 +1110,10 @@ $bannerImage = "images/".$imgNo.".png";
 echo('<div style="background-position: left top; position:relative; background-image:url('."'".$bannerImage."'".'); background-repeat:no-repeat"><img border="0" src="images/anime-anonymous-banner-3.png" width="900" height="200"/></div>');
 //<script src="xhttp://static.ak.fbcdn.net/connect.php/js/FB.Sharex" type="text/javascript"></script>
 ?>
-<fb:login-button show-faces="false" width="200" max-rows="1" scope="email,publish_stream,publish_actions"></fb:login-button> <fb:add-to-timeline show-faces="false" mode="box"></fb:add-to-timeline> <fb:share-button type="button"></fb:share-button>
+<fb:login-button show-faces="false" width="200" max-rows="1" scope="email,publish_stream,publish_actions"></fb:login-button> <fb:add-to-timeline show-faces="false" mode="box"></fb:add-to-timeline> <fb:share-button type="button_count"></fb:share-button>
 <div id="ftdata" style="background-color: #ffffff;">Loading Anime List...<img border="0" height="21" src="http://1.bp.blogspot.com/-_jr8U-tayi0/Tm-PG9zwqAI/AAAAAAAAATM/xkxNHb_R7Gs/s400/indicator-u.gif" width="21" /></div>
 </div>
-
+<a name="fb_share" type="button-count" share_url="http://apps.facebook.com/anime-anonymous/?id=820"></a>
+<a name="fb_share" type="button-count" ></a>
 </body>
 </html>
