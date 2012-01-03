@@ -310,6 +310,7 @@ var app_id;
 var redirect_path;
 var base_path;
 var app_path;
+var def_path;
 function fbinit(){
   window.fbAsyncInit = function() {
 	FB.Canvas.setAutoResize();
@@ -318,6 +319,16 @@ function fbinit(){
 	base_path = "http://anime-anonymous.herokuapp.com/";
 	app_path = "http://apps.facebook.com/anime-anonymous/";
 	?id='+mal_id+'
+	
+	
+	if(window.location != window.parent.location){
+		//its an iframe
+		def_path = app_path;
+	}else{
+		//home path
+		def_path = base_path;
+	}
+	
 	if(getParameterByName("id")){
 		redirect_path = base_path+"?id="+getParameterByName("id");
 	}else if(getParameterByName("ani")){
@@ -330,13 +341,14 @@ function fbinit(){
 				FB.getLoginStatus(function(response) {
 					if (response.session) {
 						alert('one piece');
-						FB.login(function(response) {}, {scope:'email,publish_stream,publish_actions,sms'});
+						FB.login(function(response) {}, {scope:'email,publish_stream,publish_actions'});
 					}else{
 							if(getParameterByName("code")){
 								alert('code gease');
 							}else{
 								alert('Bleach');
-								top.location=window.location="http://www.facebook.com/dialog/oauth/?scope=email,publish_stream,publish_actions,sms&client_id="+ app_id +"&redirect_uri="+ redirect_path +"&response_type=code";
+								FB.login(function(response) {}, {scope:'email,publish_stream,publish_actions'});
+								//top.location=window.location="http://www.facebook.com/dialog/oauth/?scope=email,publish_stream,publish_actions&client_id="+ app_id +"&redirect_uri="+ redirect_path +"&response_type=code";
 							}
 					}
 				});
@@ -1093,6 +1105,9 @@ $bannerImage = "images/".$imgNo.".png";
 echo('<div style="background-position: left top; position:relative; background-image:url('."'".$bannerImage."'".'); background-repeat:no-repeat"><img border="0" src="images/anime-anonymous-banner-3.png" width="900" height="200"/></div>');
 //<script src="xhttp://static.ak.fbcdn.net/connect.php/js/FB.Sharex" type="text/javascript"></script>
 ?>
+<div class="fb-login-button" data-scope="email,publish_stream,publish_actions">
+Login with Facebook
+</div>
 <div id="ftdata" style="background-color: #ffffff;">Loading Anime List...<img border="0" height="21" src="http://1.bp.blogspot.com/-_jr8U-tayi0/Tm-PG9zwqAI/AAAAAAAAATM/xkxNHb_R7Gs/s400/indicator-u.gif" width="21" /></div>
 </div>
 
