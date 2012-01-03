@@ -237,7 +237,7 @@ class FusionTable {
 	}
 }
 ?>
-<html>
+<html xmlns:fb="http://ogp.me/ns/fb#">
 <head>
    <meta charset="utf-8"/>
     <?php
@@ -1105,9 +1105,7 @@ $bannerImage = "images/".$imgNo.".png";
 echo('<div style="background-position: left top; position:relative; background-image:url('."'".$bannerImage."'".'); background-repeat:no-repeat"><img border="0" src="images/anime-anonymous-banner-3.png" width="900" height="200"/></div>');
 //<script src="xhttp://static.ak.fbcdn.net/connect.php/js/FB.Sharex" type="text/javascript"></script>
 ?>
-<div class="fb-login-button" data-scope="email,publish_stream,publish_actions">
-Login with Facebook
-</div>
+<fb:login-button show-faces="false" width="200" max-rows="1" scope="email,publish_stream,publish_actions"></fb:login-button> <fb:add-to-timeline show-faces="false" mode="box"></fb:add-to-timeline> <fb:share-button type="button"></fb:share-button>
 <div id="ftdata" style="background-color: #ffffff;">Loading Anime List...<img border="0" height="21" src="http://1.bp.blogspot.com/-_jr8U-tayi0/Tm-PG9zwqAI/AAAAAAAAATM/xkxNHb_R7Gs/s400/indicator-u.gif" width="21" /></div>
 </div>
 
