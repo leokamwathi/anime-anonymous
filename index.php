@@ -937,7 +937,7 @@ var fbSharePath = 'http://www.facebook.com/sharer.php?u='+fbLink+'&t='+encodeURI
 var fbsharelink = '<a href="#" name="fb_share" class="buttonLinx" type="button_count" share_url="http://apps.facebook.com/anime-anonymous/?id='+mal_id+'" onclick="window.open('+fbSharePath+');">Share on facebook</a>';
 //fusiontabledata += '<br/><div>'+fbsharelink+'</div>';
 fusiontabledata += '<br/><div><a href="#" class="buttonLinx" onclick="recommend();">Recommend To Friends</a></div>';
-fusiontabledata += '<br/><div><fb:add-to-timeline show-faces="false" mode="box"></fb:add-to-timeline></div>';
+//fusiontabledata += '<br/><div><fb:add-to-timeline show-faces="false" mode="box"></fb:add-to-timeline></div>';
 
 //fusiontabledata += '<div><a href="#addtolistanchor" onclick="Add2Favorite("watched",'+mal_id +');">Add to Favorites</a></div>';
 
