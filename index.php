@@ -336,17 +336,17 @@ function fbinit(){
 	}else{
 		redirect_path = base_path;
 	}
-		alert(redirect_path);
+		//alert(redirect_path);
 	
 				FB.getLoginStatus(function(response) {
 					if (response.session) {
-						alert('one piece');
+						//alert('one piece');
 						FB.login(function(response) {}, {scope:'email,publish_stream,publish_actions'});
 					}else{
 							if(getParameterByName("code")){
-								alert('code gease');
+								//alert('code gease');
 							}else{
-								alert('Bleach');
+								//alert('Bleach');
 								FB.login(function(response) {}, {scope:'email,publish_stream,publish_actions'});
 								//top.location=window.location="http://www.facebook.com/dialog/oauth/?scope=email,publish_stream,publish_actions&client_id="+ app_id +"&redirect_uri="+ redirect_path +"&response_type=code";
 							}
@@ -1044,8 +1044,15 @@ if(getParameterByName("debug")){
   if (response.session) {
 FB.ui({method: 'apprequests', display: 'iframe', message: myMessage.substr(0,254), data: myData,title:myTitle.substr(0,49)});
   } else {
-  //send to permission page
-    alert("You must be logged on to Facebook to do that.");
+	//send to permission page
+	FB.login(function(response) {}, {scope:'email,publish_stream,publish_actions'});
+	FB.getLoginStatus(function(response) {
+		if (response.session) {
+			FB.ui({method: 'apprequests', display: 'iframe', message: myMessage.substr(0,254), data: myData,title:myTitle.substr(0,49)});
+		} else {
+			alert("You must be logged on to Facebook to do that. Click the login button and try again or try refreshing the page.");
+		}
+	}
   }
 });
 }
