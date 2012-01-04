@@ -379,10 +379,11 @@ function fbinit(){
     var e = document.createElement('script'); e.async = true;
     e.src = document.location.protocol +'//connect.facebook.net/en_US/all.js';
     document.getElementById('fb-root').appendChild(e);
-	
+	/*
 	var ee = document.createElement('script'); ee.async = true;
     ee.src = document.location.protocol +'//static.ak.fbcdn.net/connect.php/js/FB.Share';
     document.getElementById('fb-share-root').appendChild(ee);
+	*/
   }());
 }
 </script>
