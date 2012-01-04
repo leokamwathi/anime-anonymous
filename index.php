@@ -926,7 +926,7 @@ var fusiontabledata = "";
 
 
 //
-fusiontabledata += topList+'<br/><div class="animeTitle" >'+title+'</div><div><br/></div><div style="float: left;"><fb:share-button type="button_count"></fb:share-button><fb:login-button show-faces="false" width="200" max-rows="0" scope="email,publish_stream,publish_actions"></fb:login-button> <fb:add-to-timeline show-faces="false" mode="button"></fb:add-to-timeline><fb:like href="http://apps.facebook.com/anime-anonymous/?id='+mal_id+'" send="true" width="300" show_faces="false" font=""></fb:like></div>';
+fusiontabledata += topList+'<br/><div class="animeTitle" >'+title+'</div><div><br/></div><div style="float: left;"><a name="fb_share" type="button_count" ></a><fb:add-to-timeline show-faces="false" mode="button"></fb:add-to-timeline><fb:like href="http://apps.facebook.com/anime-anonymous/?id='+mal_id+'" send="true" width="400" show_faces="false" font=""></fb:like><fb:login-button show-faces="false" width="100" max-rows="0" scope="email,publish_stream,publish_actions"></fb:login-button></div>';
 fusiontabledata += '<div><div><table border="0" width="100%" cellspacing="3" style="float: left;">';
 fusiontabledata += '<tr><td align="left" valign="top" colspan="2"><div id="leftbody"></div>';
 fusiontabledata += '</td></tr><tr><td width="210" align="left" valign="top"><table border="0" width="100%" cellspacing="3" cellpadding="3"><tr><td style="border-style: solid; border-width: 0px" bordercolor="#f7f7f7">';
@@ -1120,7 +1120,5 @@ echo('<div style="background-position: left top; position:relative; background-i
 
 <div id="ftdata" style="background-color: #ffffff;">Loading Anime List...<img border="0" height="21" src="http://1.bp.blogspot.com/-_jr8U-tayi0/Tm-PG9zwqAI/AAAAAAAAATM/xkxNHb_R7Gs/s400/indicator-u.gif" width="21" /></div>
 </div>
-<a name="fb_share" type="button-count" share_url="http://apps.facebook.com/anime-anonymous/?id=820"></a>
-<a name="fb_share" type="button-count" ></a>
 </body>
 </html>
