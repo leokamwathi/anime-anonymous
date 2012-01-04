@@ -1052,7 +1052,7 @@ FB.ui({method: 'apprequests', display: 'iframe', message: myMessage.substr(0,254
 		} else {
 			alert("You must be logged on to Facebook to do that. Click the login button and try again or try refreshing the page.");
 		}
-	}
+	});
   }
 });
 }
