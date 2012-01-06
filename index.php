@@ -1122,7 +1122,7 @@ String.prototype.br2nl = function() {
   ?>
 <!-- floating page sharers Start -->
 <style>
-#pageshare {position:fixed; top:350px; margin-left:-71px; float:left; border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;background-color:#eee;border:1px solid #DDD;padding:0 0 2px 0;z-index:10;}
+#pageshare {position:fixed; top:350px; margin-left:-60px; float:left; border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;background-color:#eee;border:1px solid #DDD;padding:0 0 2px 0;z-index:10;}
 #pageshare .sbutton {float:left;clear:both;margin:5px 5px 0 5px;}
 .fb_share_count_top {width:48px !important;}
 .fb_share_count_top, .fb_share_count_inner {-moz-border-radius:3px;-webkit-border-radius:3px;}
@@ -1136,10 +1136,12 @@ String.prototype.br2nl = function() {
 <div class='sbutton' id='fb'>
 <a name="fb_share" type="box_count">Share</a>
 </a>
+</div>
 <div class='sbutton' id='fb'>
 <a href="javascript:window.open('http%3A%2F%2Fwww.facebook.com%2Fshare.php%3Fu%3D<?php echo(urlencode('http://apps.facebook.com/anime-anonymous/?id='.$_REQUEST['id']));?>', '_blank', "width=400,height=500\")">
 <img src="/images/fb-share.jpg" alt="share on facebook"/>
 </a>
+</div>
 <div class='sbutton' id='fb'>
 <fb:share-button></fb:share-button>
 </div>
