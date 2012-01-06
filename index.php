@@ -381,7 +381,7 @@ function fbinit(){
     document.getElementById('fb-root').appendChild(e);
 
 	var ee = document.createElement('script'); ee.async = true;
-    ee.src = document.location.protocol +'//static.ak.fbcdn.net/connect.php/js/FB.Share';
+    ee.src = 'http://static.ak.fbcdn.net/connect.php/js/FB.Share';
     document.getElementById('fb-share-root').appendChild(ee);
 
   }());
@@ -927,7 +927,8 @@ var fusiontabledata = "";
 
 //
 //fusiontabledata += topList+'<br/><div class="animeTitle" >'+title+'</div><div><br/></div><div style="float: left;"><a name="fb_share" type="button_count" ></a><fb:add-to-timeline show-faces="false" width="100"  mode="button"></fb:add-to-timeline><fb:like href="http://apps.facebook.com/anime-anonymous/?id='+mal_id+'" send="true" width="400" show_faces="false" font=""></fb:like><fb:login-button show-faces="false" width="100" max-rows="0" scope="email,publish_stream,publish_actions"></fb:login-button></div>';
-fusiontabledata += topList+'<br/><div class="animeTitle" >'+title+'</div><div><br/></div><div style="float: left;"><table cellspace= 2 cellpadding = 2><tr><td><div style="float: left;"><a name="fb_share" type="button_count" ></a></td><td><div style="float: left;"><fb:like href="http://apps.facebook.com/anime-anonymous/?id='+mal_id+'" send="true" width="400" show_faces="false" font=""></fb:like></td><td><div style="float: left;"><fb:add-to-timeline show-faces="false" width="80"  mode="button"></fb:add-to-timeline></td><td><div style="float: right;"><fb:login-button show-faces="false" width="100" max-rows="0" scope="email,publish_stream,publish_actions"></fb:login-button></div></td></tr></table></div>';
+fusiontabledata += topList+'<br/><div class="animeTitle" >'+title+'</div>';
+//<div><br/></div><div style="float: left;"><table cellspacing = 2 cellpadding = 2><tr><td><div style="float: left;"><a name="fb_share" type="button_count" ></a></td><td><div style="float: left;"><fb:like href="http://apps.facebook.com/anime-anonymous/?id='+mal_id+'" send="true" width="400" show_faces="false" font=""></fb:like></td><td><div style="float: left;"><fb:add-to-timeline show-faces="false" width="80"  mode="button"></fb:add-to-timeline></td><td><div style="float: right;"><fb:login-button show-faces="false" width="100" max-rows="0" scope="email,publish_stream,publish_actions"></fb:login-button></div></td></tr></table></div>';
 fusiontabledata += '<div><div><table border="0" width="100%" cellspacing="3" style="float: left;">';
 fusiontabledata += '<tr><td align="left" valign="top" colspan="2"><div id="leftbody"></div>';
 fusiontabledata += '</td></tr><tr><td width="210" align="left" valign="top"><table border="0" width="100%" cellspacing="3" cellpadding="3"><tr><td style="border-style: solid; border-width: 0px" bordercolor="#f7f7f7">';
@@ -1109,10 +1110,51 @@ String.prototype.br2nl = function() {
 </style>
 </head>
 <body onload="getData();" style="background-color: #f7f7f7;" >
+
 <a name="topLink"><div/></a>
 <div id="fb-root"></div>
 <div id="fb-share-root"></div>
 <div id="wrap"  style="background-color: #ffffff;" >
+<?php 
+  if (is_string($_REQUEST['id'])){
+  ?>
+<!-- floating page sharers Start -->
+<style>
+#pageshare {position:fixed; top:350px; margin-left:-71px; float:left; border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;background-color:#eee;border:1px solid #DDD;padding:0 0 2px 0;z-index:10;}
+#pageshare .sbutton {float:left;clear:both;margin:5px 5px 0 5px;}
+.fb_share_count_top {width:48px !important;}
+.fb_share_count_top, .fb_share_count_inner {-moz-border-radius:3px;-webkit-border-radius:3px;}
+.FBConnectButton_Small, .FBConnectButton_RTL_Small {width:49px !important; -moz-border-radius:3px;/*bs-fsmsb*/-webkit-border-radius:3px;}
+.FBConnectButton_Small .FBConnectButton_Text {padding:2px 2px 3px !important;-moz-border-radius:3px;-webkit-border-radius:3px;font-size:8px;}
+</style>
+<div id='pageshare'>
+<div class='sbutton' id='fb'>
+<fb:like href='http://apps.facebook.com/anime-anonymous/?id=<?php echo($_REQUEST['id']);?>' layout='box_count' send='true' show_faces='true' width='50'/>
+</fb:like></div>
+<div class='sbutton' id='fb'>
+<a name="fb_share" type="box_count" href="http://www.facebook.com/sharer.php">Share</a>
+
+</div>
+<div class='sbutton' id='rt'>
+<script src="http://tweetmeme.com/i/scripts/button.js" type='text/javascript'></script>
+</div>
+<div class='sbutton' id='su'>
+<script src="http://www.stumbleupon.com/hostedbadge.php?s=5"></script>
+</div>
+<div class='sbutton' id='digg' style='margin-left:3px;width:48px'>
+<script src='http://widgets.digg.com/buttons.js' type='text/javascript'></script>
+<a class="DiggThisButton DiggMedium"></a>
+</div>
+<div class='sbutton' id='gplusone'>
+<script type="text/javascript" src="http://apis.google.com/js/plusone.js"></script>
+<g:plusone size="tall"></g:plusone>
+</div>
+<div style="clear: both;font-size: 9px;text-align:center;"><a href="http://socialchatrooms.blogspot.com/">Live Chat</a></div>
+</div>
+<!-- floating page sharers End -->
+<?php
+}
+?>
 <?php
 $myRnd = rand(0, 15);
 if($myRnd>9){
