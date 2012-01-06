@@ -381,9 +381,11 @@ function fbinit(){
     document.getElementById('fb-root').appendChild(e);
 	
 	if(window.location == window.parent.location){
+	/*
 		var ee = document.createElement('script'); ee.async = true;
 		ee.src = 'http://static.ak.fbcdn.net/connect.php/js/FB.Share';
 		document.getElementById('fb-share-root').appendChild(ee);
+	*/
 	}
 
   }());
