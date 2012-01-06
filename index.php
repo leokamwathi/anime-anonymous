@@ -1132,8 +1132,7 @@ String.prototype.br2nl = function() {
 <fb:like href='http://apps.facebook.com/anime-anonymous/?id=<?php echo($_REQUEST['id']);?>' layout='box_count' send='true' show_faces='true' width='50'/>
 </fb:like></div>
 <div class='sbutton' id='fb'>
-<a name="fb_share" type="box_count" href="http://www.facebook.com/sharer.php">Share</a>
-
+<a name="fb_share" type="box_count">Share</a>
 </div>
 <div class='sbutton' id='rt'>
 <script src="http://tweetmeme.com/i/scripts/button.js" type='text/javascript'></script>
@@ -1153,6 +1152,7 @@ String.prototype.br2nl = function() {
 </div>
 <!-- floating page sharers End -->
 <?php
+// href="http://www.facebook.com/sharer.php"
 }
 ?>
 <?php
