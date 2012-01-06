@@ -1138,12 +1138,16 @@ String.prototype.br2nl = function() {
 </a>
 </div>
 <div class='sbutton' id='fb'>
-<a href="javascript:window.open('http%3A%2F%2Fwww.facebook.com%2Fshare.php%3Fu%3D<?php echo(urlencode('http://apps.facebook.com/anime-anonymous/?id='.$_REQUEST['id']));?>', '_blank', "width=400,height=500\")">
-<img src="/images/fb-share.jpg" alt="share on facebook"/>
-</a>
-</div>
-<div class='sbutton' id='fb'>
-<fb:share-button></fb:share-button>
+<fb:share-button class="meta">
+<?php
+	echo('
+	<meta name="title" content="'.str_replace('<',' ',str_replace('>',' ',$output[0]['title'])).'"/>
+	<meta name="description" content="'.str_replace('<',' ',str_replace('>',' ',str_replace('&amp;','&',$output[0]['synopsis']))).'"/>
+	<link rel="image_src" href="'.$output[0]['mal_image'].'"/>
+	<link rel="target_url" href="http://apps.facebook.com/anime-anonymous/?id='.$_REQUEST['id'].'"/>
+    ');
+?>
+</fb:share-button>
 </div>
 <div class='sbutton' id='rt'>
 <script src="http://tweetmeme.com/i/scripts/button.js" type='text/javascript'></script>
