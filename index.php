@@ -929,7 +929,7 @@ var fusiontabledata = "";
 
 //
 //fusiontabledata += topList+'<br/><div class="animeTitle" >'+title+'</div><div><br/></div><div style="float: left;"><a name="fb_share" type="button_count" ></a><fb:add-to-timeline show-faces="false" width="100"  mode="button"></fb:add-to-timeline><fb:like href="http://apps.facebook.com/anime-anonymous/?id='+mal_id+'" send="true" width="400" show_faces="false" font=""></fb:like><fb:login-button show-faces="false" width="100" max-rows="0" scope="email,publish_stream,publish_actions"></fb:login-button></div>';
-fusiontabledata += topList+'<br/><div class="animeTitle" >'+title+'</div>';
+fusiontabledata += topList+'<br/><div class="animeTitle" >'+title+'</div><div><br/></div><div style="float: left;"><table cellspacing = 2 cellpadding = 2><tr><td><div style="float: left;"><a name="fb_share" type="button_count" ></a></td><td><div style="float: left;"><fb:like type="button_count" href="http://apps.facebook.com/anime-anonymous/?id='+mal_id+'" send="true" width="300" show_faces="false" font=""></fb:like></td><td><div style="float: left;"><fb:add-to-timeline show-faces="false" width="80"  mode="button"></fb:add-to-timeline></td><td><div style="float: right;"><fb:login-button show-faces="false" width="100" max-rows="0" scope="email,publish_stream,publish_actions"></fb:login-button></div></td></tr></table></div>';';
 //<div><br/></div><div style="float: left;"><table cellspacing = 2 cellpadding = 2><tr><td><div style="float: left;"><a name="fb_share" type="button_count" ></a></td><td><div style="float: left;"><fb:like href="http://apps.facebook.com/anime-anonymous/?id='+mal_id+'" send="true" width="400" show_faces="false" font=""></fb:like></td><td><div style="float: left;"><fb:add-to-timeline show-faces="false" width="80"  mode="button"></fb:add-to-timeline></td><td><div style="float: right;"><fb:login-button show-faces="false" width="100" max-rows="0" scope="email,publish_stream,publish_actions"></fb:login-button></div></td></tr></table></div>';
 fusiontabledata += '<div><div><table border="0" width="100%" cellspacing="3" style="float: left;">';
 fusiontabledata += '<tr><td align="left" valign="top" colspan="2"><div id="leftbody"></div>';
@@ -1104,6 +1104,7 @@ String.prototype.br2nl = function() {
 <style>
 #wrap { 
   width: 900px; 
+  /*overflow-x:hidden;*/
   margin: 0 auto; 
   /*overflow-y:auto;*/
   /*overflow-x:auto;*/
@@ -1118,7 +1119,7 @@ String.prototype.br2nl = function() {
 <div id="fb-share-root"></div>
 <div id="wrap"  style="background-color: #ffffff;" >
 <?php 
-  if (is_string($_REQUEST['id'])){
+  if (is_string($_REQUEST['idx'])){
   ?>
 <!-- floating page sharers Start -->
 <style>
