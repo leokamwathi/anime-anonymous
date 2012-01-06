@@ -1137,18 +1137,22 @@ String.prototype.br2nl = function() {
 <a name="fb_share" type="box_count">Share</a>
 </a>
 </div>
-<div class='sbutton' id='fb'>
-<fb:share-button class="meta">
+
 <?php
+/*
 	echo('
+	<div class='sbutton' id='fb'>
+	<fb:share-button class="meta">
 	<meta name="title" content="'.str_replace('<',' ',str_replace('>',' ',$output[0]['title'])).'"/>
 	<meta name="description" content="'.str_replace('<',' ',str_replace('>',' ',str_replace('&amp;','&',$output[0]['synopsis']))).'"/>
 	<link rel="image_src" href="'.$output[0]['mal_image'].'"/>
 	<link rel="target_url" href="http://apps.facebook.com/anime-anonymous/?id='.$_REQUEST['id'].'"/>
+	</fb:share-button>
+	</div>
     ');
+	*/
 ?>
-</fb:share-button>
-</div>
+
 <div class='sbutton' id='rt'>
 <script src="http://tweetmeme.com/i/scripts/button.js" type='text/javascript'></script>
 </div>
