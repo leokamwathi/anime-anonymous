@@ -1135,9 +1135,13 @@ String.prototype.br2nl = function() {
 </fb:like></div>
 <div class='sbutton' id='fb'>
 <a name="fb_share" type="box_count">Share</a>
+</a>
+<div class='sbutton' id='fb'>
 <a href="javascript:window.open('http%3A%2F%2Fwww.facebook.com%2Fshare.php%3Fu%3D<?php echo(urlencode('http://apps.facebook.com/anime-anonymous/?id='.$_REQUEST['id']));?>', '_blank', "width=400,height=500\")">
 <img src="/images/fb-share.jpg" alt="share on facebook"/>
 </a>
+<div class='sbutton' id='fb'>
+<fb:share-button></fb:share-button>
 </div>
 <div class='sbutton' id='rt'>
 <script src="http://tweetmeme.com/i/scripts/button.js" type='text/javascript'></script>
