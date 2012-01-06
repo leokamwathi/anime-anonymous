@@ -379,10 +379,12 @@ function fbinit(){
     var e = document.createElement('script'); e.async = true;
     e.src = document.location.protocol +'//connect.facebook.net/en_US/all.js';
     document.getElementById('fb-root').appendChild(e);
-
-	var ee = document.createElement('script'); ee.async = true;
-    ee.src = 'http://static.ak.fbcdn.net/connect.php/js/FB.Share';
-    document.getElementById('fb-share-root').appendChild(ee);
+	
+	if(window.location == window.parent.location){
+		var ee = document.createElement('script'); ee.async = true;
+		ee.src = 'http://static.ak.fbcdn.net/connect.php/js/FB.Share';
+		document.getElementById('fb-share-root').appendChild(ee);
+	}
 
   }());
 }
@@ -1133,6 +1135,9 @@ String.prototype.br2nl = function() {
 </fb:like></div>
 <div class='sbutton' id='fb'>
 <a name="fb_share" type="box_count">Share</a>
+<a href="javascript:window.open('http%3A%2F%2Fwww.facebook.com%2Fshare.php%3Fu%3D<?php echo(urlencode('http://apps.facebook.com/anime-anonymous/?id='.$_REQUEST['id']));?>', '_blank', "width=400,height=500\")">
+<img src="/images/fb-share.jpg" alt="share on facebook"/>
+</a>
 </div>
 <div class='sbutton' id='rt'>
 <script src="http://tweetmeme.com/i/scripts/button.js" type='text/javascript'></script>
